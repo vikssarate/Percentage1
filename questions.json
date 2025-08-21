@@ -122,27 +122,6 @@
     }
   ]
 }
-  ] },
-{
-  "tests": [
-    {
-      "id": "Aptitude2",
-      "title": "Percen",
-      "durationMinutes": 30,
-      "negative": 0.25,
-      "questions": [
-        {
-    "section": "type 1",
-    "text": "In a class, if 60% of the students are boys and the number of girls is 36, then the number of boys is:",
-    "options": [
-      "58",
-      "65",
-      "60",
-      "54"
-    ],
-    "answer": 3,
-    "explain": "Girls = 40%. If 40% = 36, total = 90. Boys = 60% of 90 = 54."
-  } ] 
-    }
   ]
 }
+  
