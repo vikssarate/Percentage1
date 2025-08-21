@@ -1,8 +1,8 @@
 {
   "tests": [
     {
-      "id": "NounTest1",
-      "title": "Noun Test",
+      "id": "Aptitude",
+      "title": "Percentage",
       "durationMinutes": 30,
       "negative": 0.25,
       "questions": [
