@@ -117,9 +117,20 @@
         { "section": "type 2",
     "text": "<img src='images/vu1.jpeg' alt='beam diagram' style='max-width:100%; height:auto;'>",
   "options": ["a", "b", "c", "d"],
-  "answer": 1
+  "answer": 1 },
+        
+        { "section": "type 2",
+    "text": "<img src='images/vu2.jpeg' alt='beam diagram' style='max-width:100%; height:auto;'>",
+  "options": ["a", "b", "c", "d"],
+  "answer": 1 },
+        { "section": "type 2",
+    "text": "<img src='images/vu3.jpeg' alt='beam diagram' style='max-width:100%; height:auto;'>",
+  "options": ["a", "b", "c", "d"],
+  "answer": 1 },
+      
     
-    }
+    
+    
   ]
 }
   ]
