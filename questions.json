@@ -1,4 +1,11 @@
-[
+{
+  "tests": [
+    {
+      "id": "NounTest1",
+      "title": "Noun Test",
+      "durationMinutes": 30,
+      "negative": 0.25,
+      "questions": [
   {
     "section": "type 1",
     "text": "A number is first increased by 20% and then reduced by 15%. If the final value is 2040, then what is the initial value of the number?",
@@ -108,3 +115,6 @@
     "explain": "Girls = 40%. If 40% = 36, total = 90. Boys = 60% of 90 = 54."
   }
 ]
+    }
+  ]
+}
