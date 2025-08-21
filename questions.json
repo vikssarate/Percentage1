@@ -115,13 +115,10 @@
     "explain": "Girls = 40%. If 40% = 36, total = 90. Boys = 60% of 90 = 54."
   },
         { section": "type 2",
-    "text": "<image>",
-    "options": [
-      "58",
-      "65",
-      "60",
-      "54"
-]
+    "text": "<img src='images/Vu1.png' alt='beam diagram' style='max-width:100%; height:auto;'>",
+  "options": ["a", "b", "c", "d"],
+  "answer": 1
+    
     }
   ]
 }
