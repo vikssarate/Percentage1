@@ -1,1 +1,427 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<link rel="manifest" href="manifest.webmanifest" />
+<link rel="apple-touch-icon" href="icons/icon-192.png" />
+<title>Exam Practice Demo</title>
+<style>
+:root{--bg:#f6f9ff;--card:#fff;--text:#0f172a;--muted:#64748b;--border:#e5edf7;--accent:#1565c0;--good:#1e8e3e;--bad:#c62828;--radius:14px;--shadow:0 10px 30px rgba(0,0,0,.06)}
+@media(prefers-color-scheme:dark){:root{--bg:#0b0f14;--card:#121923;--text:#eaf2ff;--muted:#8aa0b7;--border:#1e2a3a;--accent:#5ab0ff;--shadow:0 12px 34px rgba(0,0,0,.35)}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.4 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
+.wrap{max-width:1200px;margin:0 auto;padding:14px 16px}
+header{position:sticky;top:0;background:color-mix(in oklab,var(--bg) 85%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);z-index:5}
+.top{display:flex;align-items:center;justify-content:space-between}
+h1{margin:0;font-size:18px}
+.grid{display:grid;gap:14px}
+@media(min-width:1000px){.grid{grid-template-columns:2fr 1fr}}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
+button{border:1px solid var(--border);border-radius:12px;background:var(--card);padding:10px 12px;color:var(--text);cursor:pointer}
+button.primary{background:var(--accent);color:#fff;border-color:transparent;font-weight:700}
+.badge{display:inline-block;padding:4px 8px;border-radius:999px;background:color-mix(in oklab,var(--accent),white 18%);color:#fff;font-size:12px}
+.controls{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+.options{display:grid;gap:10px}
+@media(min-width:700px){.options{grid-template-columns:1fr}}
+.opt{display:flex;align-items:center;gap:10px;border:1px solid var(--border);border-radius:10px;padding:10px;cursor:pointer}
+.opt.selected{outline:2px solid var(--accent)}
+.palette{display:grid;grid-template-columns:repeat(10,1fr);gap:8px;margin-top:14px}
+.palette button{padding:8px;border-radius:8px}
+.muted{color:var(--muted);font-size:12px}
+.timer{font-weight:700}
+hr{border:none;border-top:1px solid var(--border);margin:12px 0}
+.qtitle{font-weight:800;margin:0 0 8px 0}
+#qText img{max-width:100%;height:auto;display:block;margin-top:8px;border-radius:8px}
 
+/* Section tabs */
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 8px}
+.tab{border:1px solid var(--border);border-radius:999px;padding:6px 10px;font-size:13px;cursor:pointer}
+.tab.active{background:var(--accent);color:#fff;border-color:transparent}
+.badge.sec{margin-left:8px;background:color-mix(in oklab,var(--good),white 18%)}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap top">
+    <h1>📝 Exam Practice Demo</h1>
+    <div class="timer" id="timer">--:--:--</div>
+  </div>
+</header>
+
+<main class="wrap grid">
+  <section class="card">
+    <div id="testList">
+      <h2>Select a Test</h2>
+      <div id="tests"></div>
+      <p class="muted">Features: timer, negative marking, palette, review, export. Works offline.</p>
+    </div>
+
+    <div id="examArea" style="display:none">
+      <div class="badge" id="testTitle"></div>
+      <div class="muted">Remaining: <span id="remain"></span></div>
+      <div class="tabs" id="sectionTabs"></div>
+
+      <hr>
+      <h3 class="qtitle" id="qHead">Q1.</h3>
+      <div id="qText"></div>
+      <div class="options" id="optWrap"></div>
+
+      <div class="controls">
+        <button id="clearBtn">Clear</button>
+        <button id="markBtn">Mark for Review</button>
+        <button id="prevBtn">Prev</button>
+        <button id="nextBtn">Save & Next</button>
+        <button id="submitBtn" class="primary">Submit</button>
+      </div>
+
+      <h3>Question Palette</h3>
+      <div class="palette" id="palette"></div>
+    </div>
+
+    <div id="resultArea" style="display:none">
+      <h2>Result</h2>
+      <div id="resultSummary"></div>
+      <button id="reviewBtn" class="primary">Review Answers</button>
+      <button id="exportBtn">Export Result JSON</button>
+    </div>
+  </section>
+ <section class="card" id="recentAttemptsCard">
+  <h2>Recent Attempts</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Date & Time</th>
+        <th>Test</th>
+        <th>Score</th>
+        <th>%</th>
+        <th>Time</th>
+      </tr>
+    </thead>
+    <tbody id="attemptTableBody"></tbody>
+  </table>
+</section>
+  <aside class="card">
+    <h3>Test Info</h3>
+    <div id="info"></div>
+  </aside>
+</main>
+
+<script>
+// ---- Attempt history (localStorage) ----
+const ATTEMPT_KEY_BASE = 'attempt_history_v1_';
+function attemptsKey(testId){ return ATTEMPT_KEY_BASE + (testId || 'default'); }
+
+function loadAttempts(testId) {
+  try { return JSON.parse(localStorage.getItem(attemptsKey(testId))) || []; }
+  catch { return []; }
+}
+function saveAttempts(testId, list) {
+  localStorage.setItem(attemptsKey(testId), JSON.stringify(list));
+}
+function recordAttempt(entry) {
+  const keyId = entry.testId || 'default';
+  const list = loadAttempts(keyId);
+  list.push(entry);
+  if (list.length > 100) list.shift();   // keep it light
+  saveAttempts(keyId, list);
+}
+function fmtTime(s){ if(s==null) return '-'; const m=Math.floor(s/60), ss=s%60; return `${String(m).padStart(2,'0')}:${String(ss).padStart(2,'0')}`; }
+function pct(score,total){ return total ? ((score/total)*100).toFixed(1) : '0.0'; }
+
+function renderRecentAttempts(testId){
+  const tbody = document.getElementById('attemptTableBody');
+  if(!tbody) return;
+  const all = loadAttempts(testId);
+  const lastSix = all.slice(-6).reverse(); // current + previous 5
+  if(!lastSix.length){ tbody.innerHTML = `<tr><td colspan="6">No attempts yet.</td></tr>`; return; }
+  tbody.innerHTML = lastSix.map((a,i)=>`
+    <tr>
+      <td>${i+1}</td>
+      <td>${new Date(a.when).toLocaleString()}</td>
+      <td>${a.testId || '-'}</td>
+      <td>${a.score} / ${a.total}</td>
+      <td>${pct(a.score,a.total)}%</td>
+      <td>${fmtTime(a.timeSec)}</td>
+    </tr>
+  `).join('');
+}
+// ----------------------------------------
+
+/* ========= App state ========= */
+const state = {
+  tests: [],
+  activeTest: null,
+  idx: 0,                 // current GLOBAL question index
+  answers: {},            // key(q.id ?? i) -> option index
+  review: {},             // key(q.id ?? i) -> true
+  startTs: null,
+  endTs: null,
+  timer: null,
+
+  // Sections
+  section: 'All',         // current section filter
+  sectionIndexMap: []     // array of GLOBAL indexes included in current section
+};
+
+/* ========= Load questions ========= */
+async function loadQuestions() {
+  const res = await fetch('questions.json?v=img9');
+  const data = await res.json();
+  state.tests = Array.isArray(data)
+    ? [{ id:'demo', title:'Demo Test', durationMinutes:30, negative:0.25, questions:data }]
+    : data.tests;
+  renderTestList();
+}
+
+/* ========= DOM refs ========= */
+const $ = s => document.querySelector(s);
+const testsEl     = $('#tests');
+const testList    = $('#testList');
+const examArea    = $('#examArea');
+const resultArea  = $('#resultArea');
+const qHead       = $('#qHead');
+const qText       = $('#qText');
+const optWrap     = $('#optWrap');
+const palette     = $('#palette');
+const testTitle   = $('#testTitle');
+const info        = $('#info');
+const timerEl     = $('#timer');
+const remain      = $('#remain');
+const sectionTabs = $('#sectionTabs');
+
+/* ========= Helpers ========= */
+const fmt=t=>String(t).padStart(2,'0');
+const fmtHMS=sec=>{
+  const h=Math.floor(sec/3600), m=Math.floor((sec%3600)/60), s=Math.floor(sec%60);
+  return `${fmt(h)}:${fmt(m)}:${fmt(s)}`;
+};
+
+/* === Section helpers === */
+function getAllSections(list){
+  const set=new Set();
+  list.forEach(q=>{ if(q.section) set.add(q.section); });
+  return ['All',...Array.from(set)];
+}
+function buildSectionIndexMap(){
+  const list=state.activeTest.questions;
+  const keep = state.section==='All' ? ()=>true : (q)=>q.section===state.section;
+  const prev=state.idx;
+  state.sectionIndexMap=[];
+  list.forEach((q,i)=>{ if(keep(q)) state.sectionIndexMap.push(i); });
+  if(!state.sectionIndexMap.length){ state.idx=0; return; }
+  const pos=state.sectionIndexMap.indexOf(prev);
+  state.idx = pos>=0 ? prev : state.sectionIndexMap[0];
+}
+function renderSectionTabs(){
+  const list=state.activeTest.questions;
+  const sections=getAllSections(list);
+  sectionTabs.innerHTML='';
+  sections.forEach(name=>{
+    const count = name==='All' ? list.length : list.filter(q=>q.section===name).length;
+    const b=document.createElement('button');
+    b.className='tab'+(state.section===name?' active':'');
+    b.textContent=`${name} (${count})`;
+    b.onclick=()=>{
+      state.section=name;
+      buildSectionIndexMap();
+      renderPalette();
+      renderQuestion();
+      renderSectionTabs();
+    };
+    sectionTabs.appendChild(b);
+  });
+  const badge=document.createElement('span');
+  badge.className='badge sec';
+  const pos=state.sectionIndexMap.indexOf(state.idx);
+  badge.textContent=`Showing ${pos+1} / ${state.sectionIndexMap.length}`;
+  sectionTabs.appendChild(badge);
+}
+
+/* ========= Test lifecycle ========= */
+function startTest(t){
+  state.activeTest=t;
+  state.idx=0;
+  state.answers={};
+  state.review={};
+  state.section='All';
+  state.startTs=Date.now();
+  state.endTs=state.startTs + t.durationMinutes*60*1000;
+
+  testList.style.display='none';
+  resultArea.style.display='none';
+  examArea.style.display='block';
+
+  testTitle.textContent=t.title;
+  info.innerHTML=`<p><b>Negative Marking:</b> -${t.negative}</p>
+                  <p><b>Marks / correct:</b> 1 (or per question)</p>`;
+
+  buildSectionIndexMap();
+  renderSectionTabs();
+
+  clearInterval(state.timer);
+  tickTimer();
+  state.timer=setInterval(tickTimer,1000);
+
+  renderQuestion();
+  renderPalette();
+}
+function tickTimer(){
+  if(!state.activeTest) return;
+  const left=Math.max(0,Math.floor((state.endTs-Date.now())/1000));
+  timerEl.textContent=fmtHMS(left);
+  remain.textContent=fmtHMS(left);
+  if(left===0) submitTest();
+}
+function currentQuestion(){ return state.activeTest.questions[state.idx]; }
+
+/* ========= Renderers ========= */
+function renderQuestion(){
+  const q=currentQuestion();
+
+  // Heading & body (HTML allowed)
+  qHead.textContent=`Q${state.idx+1}.`;
+  qText.innerHTML=q.text;
+
+// NEW: show optional figure
+if (q.image) {
+    const img = document.createElement('img');
+    img.src = q.image;
+    img.alt = 'figure';
+    img.loading = 'lazy';
+    qText.appendChild(img);
+}
+
+  // Options (store by q.id if present)
+  optWrap.innerHTML='';
+  const key=q.id ?? state.idx;
+
+  q.options.forEach((opt,i)=>{
+    const btn=document.createElement('button');
+    btn.className='opt';
+    btn.type='button';
+    btn.innerHTML=opt; // allow HTML in options
+    if(state.answers[key]===i) btn.classList.add('selected');
+    btn.onclick=()=>{
+      state.answers[key]=i;
+      renderQuestion();
+      renderPalette();
+    };
+    optWrap.appendChild(btn);
+  });
+}
+function renderPalette(){
+  const list=state.activeTest.questions;
+  palette.innerHTML='';
+  list.forEach((q,i)=>{
+    const b=document.createElement('button');
+    b.textContent=i+1;
+
+    const key=q.id ?? i;
+    const answered=state.answers[key]!=null;
+    if(answered) b.style.background='rgba(21,101,192,.15)';
+
+    const inFilter = state.section==='All' || q.section===state.section;
+    b.style.opacity=inFilter ? 1 : .35;
+
+    b.onclick=()=>{ state.idx=i; renderQuestion(); renderSectionTabs(); };
+    palette.appendChild(b);
+  });
+}
+
+/* ========= Controls ========= */
+$('#prevBtn').onclick=()=>{
+  const pos=state.sectionIndexMap.indexOf(state.idx);
+  if(pos>0){ state.idx=state.sectionIndexMap[pos-1]; renderQuestion(); }
+};
+$('#nextBtn').onclick=()=>{
+  const pos=state.sectionIndexMap.indexOf(state.idx);
+  if(pos<state.sectionIndexMap.length-1){ state.idx=state.sectionIndexMap[pos+1]; renderQuestion(); }
+};
+$('#clearBtn').onclick=()=>{
+  const q=currentQuestion(); const key=q.id ?? state.idx;
+  delete state.answers[key];
+  renderQuestion(); renderPalette();
+};
+$('#markBtn').onclick=()=>{
+  const q=currentQuestion(); const key=q.id ?? state.idx;
+  state.review[key] = !state.review[key];
+  renderPalette();
+};
+$('#submitBtn').onclick=()=>submitTest();
+
+/* ========= Submit / Review / Export ========= */
+function submitTest(){
+  clearInterval(state.timer);
+  const t=state.activeTest;
+  const neg=t.negative || 0;
+  let score=0, correct=0, wrong=0, unattempt=0;
+
+  // Score across ALL questions
+  t.questions.forEach((q,i)=>{
+    const key=q.id ?? i;
+    const a=state.answers[key];
+    if(a==null){ unattempt++; return; }
+    if(a===q.answer){ correct++; score += (q.marks||1); }
+    else { wrong++; score -= neg; }
+  });
+
+  const total=t.questions.length;
+  $('#resultSummary').innerHTML=
+    `<p><b>Score:</b> ${score.toFixed(2)} / ${total}</p>
+     <p><b>Correct:</b> ${correct}, <b>Wrong:</b> ${wrong}, <b>Unattempted:</b> ${unattempt}</p>
+     <p><b>Time:</b> ${fmtHMS(Math.floor((Date.now()-state.startTs)/1000))}</p>`;
+  examArea.style.display='none';examArea.style.display = 'none';
+
+// Save attempt
+recordAttempt({
+  when: new Date().toISOString(),
+  testId: (state.activeTest && state.activeTest.title) || 'Noun Test',
+  score: score,
+  total: total,
+  correct: correct,
+  wrong: wrong,
+  unattempted: unattempt,
+  timeSec: Math.floor((Date.now() - state.startTs) / 1000)
+});
+
+// Refresh the recent attempts list
+renderRecentAttempts((state.activeTest && state.activeTest.title) || 'Noun Test');
+
+  resultArea.style.display='block';
+}
+$('#reviewBtn').onclick=()=>{
+  state.idx=0;
+  examArea.style.display='block';
+  resultArea.style.display='none';
+  renderQuestion(); renderPalette();
+};
+$('#exportBtn').onclick=()=>{
+  const payload={ test: state.activeTest?.id, answers: state.answers, review: state.review, ts: new Date().toISOString() };
+  const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a'); a.href=url; a.download='exam_result.json'; a.click(); URL.revokeObjectURL(url);
+};
+
+/* ========= Test list ========= */
+function renderTestList(){
+  testsEl.innerHTML='';
+  state.tests.forEach(t=>{
+    const b=document.createElement('button');
+    b.className='opt';
+    b.innerHTML=`<div><b>${t.title}</b><div class="muted">${t.durationMinutes} min — ${t.questions.length} Q</div></div>`;
+    b.onclick=()=>startTest(t);
+    testsEl.appendChild(b);
+  });
+}
+
+/* ========= Boot ========= */
+loadQuestions();
+if('serviceWorker' in navigator){
+  window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js'));
+}
+</script>
+</body>
+</html>
