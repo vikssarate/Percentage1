@@ -1,7 +1,7 @@
 {
   "tests": [
     {
-      "id": "Aptitude",
+      "id": "Aptitude1",
       "title": "Percentage",
       "durationMinutes": 30,
       "negative": 0.25,
