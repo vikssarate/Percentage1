@@ -26,9 +26,10 @@ button.primary{background:var(--accent);color:#fff;border-color:transparent;font
 .options{display:grid;gap:10px}
 @media(min-width:700px){.options{grid-template-columns:1fr}}
 .opt{display:flex;align-items:center;gap:10px;border:1px solid var(--border);border-radius:10px;padding:10px;cursor:pointer}
-.opt.selected{outline:2px solid var(--accent)}         /* during taking test */
-.opt.correct{outline:2px solid var(--good)}            /* review: correct option */
-.opt.picked{outline:2px solid var(--accent)}           /* review: your chosen (if wrong) */
+.opt.selected{outline:2px solid var(--accent)}        /* during taking test */
+.opt.correct{outline:2px solid var(--good)}           /* review: correct option */
+.opt.picked{outline:2px solid var(--accent)}          /* review: your chosen (if wrong) */
+.opt:disabled{opacity:.85;cursor:not-allowed}
 .palette{display:grid;grid-template-columns:repeat(10,1fr);gap:8px;margin-top:14px}
 .palette button{padding:8px;border-radius:8px}
 .muted{color:var(--muted);font-size:12px}
@@ -43,18 +44,18 @@ hr{border:none;border-top:1px solid var(--border);margin:12px 0}
 .tab.active{background:var(--accent);color:#fff;border-color:transparent}
 .badge.sec{margin-left:8px;background:color-mix(in oklab,var(--good),white 18%)}
 
-/* ✅ Solution panel */
+/* Solution panel */
 .solution{margin-top:12px;border:1px solid var(--border);border-radius:12px;padding:12px;background:color-mix(in oklab,var(--card),white 4%)}
 .solution[open]{border-color:#c7d2fe;background:color-mix(in oklab,var(--card),white 8%)}
 .d-none{display:none}
 
-/* ✅ Solution images grid + captions + zoom cursor */
+/* Solution images grid + captions + zoom cursor */
 .sol-imgs{display:grid;gap:10px;margin-top:8px}
 .sol-imgs figure{margin:0}
 .sol-imgs img{max-width:100%;height:auto;border:1px solid var(--border);border-radius:6px;cursor:zoom-in}
 .sol-imgs figcaption{font-size:.85rem;color:#6b7280;margin-top:4px}
 
-/* ✅ Dialog lightbox */
+/* Dialog lightbox */
 dialog{border:none;border-radius:12px;padding:12px;max-width:min(96vw,900px)}
 dialog::backdrop{background:rgba(0,0,0,.5)}
 </style>
@@ -85,13 +86,13 @@ dialog::backdrop{background:rgba(0,0,0,.5)}
       <div id="qText"></div>
       <div class="options" id="optWrap"></div>
 
-      <!-- ✅ View Solution panel -->
+      <!-- View Solution panel -->
       <details id="solutionPanel" class="solution d-none">
         <summary>View Solution</summary>
         <div id="solutionContent"></div>
       </details>
 
-      <!-- ✅ Lightbox dialog for solution images -->
+      <!-- Lightbox dialog for solution images -->
       <dialog id="imgDlg">
         <img id="imgDlgImg" alt="Solution image" style="max-width:100%;height:auto" />
         <form method="dialog" style="text-align:right;margin-top:8px">
@@ -197,12 +198,13 @@ const state = {
   section: 'All',
   sectionIndexMap: [],
 
-  submitted: false        // ✅ gates solution visibility & review highlighting
+  submitted: false        // gates solution visibility & review highlighting
 };
 
 /* ========= Load questions ========= */
 async function loadQuestions() {
-  const res = await fetch('questions.json?v=0b68d69'); // your cache-busted URL
+  // Use a token your CI will overwrite (matches sed pattern)
+  const res = await fetch('questions.json?v=dev');
   const data = await res.json();
   state.tests = Array.isArray(data)
     ? [{ id:'demo', title:'Demo Test', durationMinutes:30, negative:0.25, questions:data }]
@@ -343,7 +345,7 @@ function renderQuestion(){
     btn.innerHTML=opt; // allow HTML in options
 
     if (!state.submitted) {
-      // During test: keep the old blue selection
+      // During test: blue for selected
       if(sel===i) btn.classList.add('selected');
       btn.onclick=()=>{
         state.answers[key]=i;
@@ -351,17 +353,16 @@ function renderQuestion(){
         renderPalette();
       };
     } else {
-      // After submit: show green for correct, blue for your picked (if wrong)
+      // After submit: green for correct, blue for your picked (if wrong)
       if (i === q.answer) btn.classList.add('correct');
       if (sel != null && i === sel && sel !== q.answer) btn.classList.add('picked');
-      // Disable changing answers in review
-      btn.disabled = true;
+      btn.disabled = true; // lock in review
     }
 
     optWrap.appendChild(btn);
   });
 
-  // ✅ Render solution (hidden until submitted)
+  // Render solution (hidden until submitted)
   renderSolution(q);
 }
 
@@ -369,11 +370,9 @@ function renderSolution(q){
   const panel   = document.getElementById('solutionPanel');
   const content = document.getElementById('solutionContent');
 
-  // text solution (supports 'explain' or 'solution_html' or 'solution')
   const html = q.solution_html || q.explain || q.solution || '';
   content.innerHTML = html || '<em>Solution not available.</em>';
 
-  // images (array or single)
   const imgs = Array.isArray(q.solution_images)
     ? q.solution_images
     : (q.solution_img ? [q.solution_img] : []);
@@ -386,7 +385,6 @@ function renderSolution(q){
     imgs.forEach((src, i) => {
       const fig = document.createElement('figure');
 
-      // WebP + JPG/PNG fallback using same basename
       const webp = src.replace(/\.(png|jpe?g|webp)$/i, '.webp');
       fig.innerHTML = `
         <picture>
@@ -408,7 +406,6 @@ function renderSolution(q){
     content.appendChild(wrap);
   }
 
-  // show only after submit/review
   if (state.submitted) {
     panel.classList.remove('d-none');
   } else {
@@ -445,30 +442,30 @@ function renderPalette(){
 }
 
 /* ========= Controls ========= */
-$('#prevBtn').onclick=()=>{
+document.getElementById('prevBtn').onclick=()=>{
   const pos=state.sectionIndexMap.indexOf(state.idx);
   if(pos>0){ state.idx=state.sectionIndexMap[pos-1]; renderQuestion(); }
 };
-$('#nextBtn').onclick=()=>{
+document.getElementById('nextBtn').onclick=()=>{
   const pos=state.sectionIndexMap.indexOf(state.idx);
   if(pos<state.sectionIndexMap.length-1){ state.idx=state.sectionIndexMap[pos+1]; renderQuestion(); }
 };
-$('#clearBtn').onclick=()=>{
+document.getElementById('clearBtn').onclick=()=>{
   const q=currentQuestion(); const key=q.id ?? state.idx;
   delete state.answers[key];
   renderQuestion(); renderPalette();
 };
-$('#markBtn').onclick=()=>{
+document.getElementById('markBtn').onclick=()=>{
   const q=currentQuestion(); const key=q.id ?? state.idx;
   state.review[key] = !state.review[key];
   renderPalette();
 };
-$('#submitBtn').onclick=()=>submitTest();
+document.getElementById('submitBtn').onclick=()=>submitTest();
 
 /* ========= Submit / Review / Export ========= */
 function submitTest(){
   clearInterval(state.timer);
-  state.submitted = true; // ✅ enable solutions & review highlighting
+  state.submitted = true; // enable solutions & review highlighting
   const t=state.activeTest;
   const neg=t.negative || 0;
   let score=0, correct=0, wrong=0, unattempt=0;
