@@ -198,7 +198,7 @@ const state = {
 
 /* ========= Load questions ========= */
 async function loadQuestions() {
-  const res = await fetch('questions.json?v=img12');
+  const res = await fetch('questions.json?v=img13');
   const data = await res.json();
   state.tests = Array.isArray(data)
     ? [{ id:'demo', title:'Demo Test', durationMinutes:30, negative:0.25, questions:data }]
