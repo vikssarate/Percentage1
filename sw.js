@@ -8,8 +8,8 @@ self.addEventListener('install', (e) => {
     caches.open(SHELL_CACHE).then(c =>
       c.addAll([
         './',                 // GitHub Pages root of this app
-        './index.html',
-        './questions.json',   // you already version it with ?v=..., still fine to keep here
+        './index.html'
+        
       ])
     )
   );
