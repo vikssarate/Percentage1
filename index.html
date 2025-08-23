@@ -26,7 +26,9 @@ button.primary{background:var(--accent);color:#fff;border-color:transparent;font
 .options{display:grid;gap:10px}
 @media(min-width:700px){.options{grid-template-columns:1fr}}
 .opt{display:flex;align-items:center;gap:10px;border:1px solid var(--border);border-radius:10px;padding:10px;cursor:pointer}
-.opt.selected{outline:2px solid var(--accent)}
+.opt.selected{outline:2px solid var(--accent)}         /* during taking test */
+.opt.correct{outline:2px solid var(--good)}            /* review: correct option */
+.opt.picked{outline:2px solid var(--accent)}           /* review: your chosen (if wrong) */
 .palette{display:grid;grid-template-columns:repeat(10,1fr);gap:8px;margin-top:14px}
 .palette button{padding:8px;border-radius:8px}
 .muted{color:var(--muted);font-size:12px}
@@ -55,10 +57,6 @@ hr{border:none;border-top:1px solid var(--border);margin:12px 0}
 /* ✅ Dialog lightbox */
 dialog{border:none;border-radius:12px;padding:12px;max-width:min(96vw,900px)}
 dialog::backdrop{background:rgba(0,0,0,.5)}
-
-/* ✅ Review highlights */
-.opt.correct  { outline:3px solid var(--good) !important; }   /* green */
-.opt.selected { outline:3px solid var(--accent) !important; } /* blue  */
 </style>
 </head>
 <body>
@@ -120,22 +118,24 @@ dialog::backdrop{background:rgba(0,0,0,.5)}
       <button id="exportBtn">Export Result JSON</button>
     </div>
   </section>
- <section class="card" id="recentAttemptsCard">
-  <h2>Recent Attempts</h2>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>Date & Time</th>
-        <th>Test</th>
-        <th>Score</th>
-        <th>%</th>
-        <th>Time</th>
-      </tr>
-    </thead>
-    <tbody id="attemptTableBody"></tbody>
-  </table>
-</section>
+
+  <section class="card" id="recentAttemptsCard">
+    <h2>Recent Attempts</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Date & Time</th>
+          <th>Test</th>
+          <th>Score</th>
+          <th>%</th>
+          <th>Time</th>
+        </tr>
+      </thead>
+      <tbody id="attemptTableBody"></tbody>
+    </table>
+  </section>
+
   <aside class="card">
     <h3>Test Info</h3>
     <div id="info"></div>
@@ -197,12 +197,12 @@ const state = {
   section: 'All',
   sectionIndexMap: [],
 
-  submitted: false        // ✅ gates solution visibility
+  submitted: false        // ✅ gates solution visibility & review highlighting
 };
 
 /* ========= Load questions ========= */
 async function loadQuestions() {
-  const res = await fetch('questions.json?v=80c189e');
+  const res = await fetch('questions.json?v=b76ac63'); // your cache-busted URL
   const data = await res.json();
   state.tests = Array.isArray(data)
     ? [{ id:'demo', title:'Demo Test', durationMinutes:30, negative:0.25, questions:data }]
@@ -333,32 +333,30 @@ function renderQuestion(){
 
   // Options (store by q.id if present)
   optWrap.innerHTML='';
-  const key = q.id ?? state.idx;
+  const key=q.id ?? state.idx;
+  const sel = state.answers[key];     // user's selected option (0..3)
 
-  q.options.forEach((opt, i) => {
-    const btn = document.createElement('button');
-    btn.className = 'opt';
-    btn.type = 'button';
-    btn.innerHTML = opt;
+  q.options.forEach((opt,i)=>{
+    const btn=document.createElement('button');
+    btn.className='opt';
+    btn.type='button';
+    btn.innerHTML=opt; // allow HTML in options
 
-    const isUser    = state.answers[key] === i;
-    const isCorrect = q.answer === i;
-
-    if (state.submitted) {
-      // Review mode
-      if (isCorrect)            btn.classList.add('correct');   // green
-      if (isUser && !isCorrect) btn.classList.add('selected');  // blue only if wrong
+    if (!state.submitted) {
+      // During test: keep the old blue selection
+      if(sel===i) btn.classList.add('selected');
+      btn.onclick=()=>{
+        state.answers[key]=i;
+        renderQuestion();
+        renderPalette();
+      };
     } else {
-      // During test
-      if (isUser) btn.classList.add('selected');                // blue
+      // After submit: show green for correct, blue for your picked (if wrong)
+      if (i === q.answer) btn.classList.add('correct');
+      if (sel != null && i === sel && sel !== q.answer) btn.classList.add('picked');
+      // Disable changing answers in review
+      btn.disabled = true;
     }
-
-    btn.onclick = () => {
-      if (state.submitted) return; // lock after submit
-      state.answers[key] = i;
-      renderQuestion();
-      renderPalette();
-    };
 
     optWrap.appendChild(btn);
   });
@@ -470,7 +468,7 @@ $('#submitBtn').onclick=()=>submitTest();
 /* ========= Submit / Review / Export ========= */
 function submitTest(){
   clearInterval(state.timer);
-  state.submitted = true; // ✅ enable solutions in review
+  state.submitted = true; // ✅ enable solutions & review highlighting
   const t=state.activeTest;
   const neg=t.negative || 0;
   let score=0, correct=0, wrong=0, unattempt=0;
