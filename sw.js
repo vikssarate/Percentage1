@@ -1,54 +1,70 @@
-const CACHE = 'exam-practice-v76';
+// sw.js  — shell precache + runtime cache for ALL images
+const SHELL_CACHE = 'exam-shell-v78';   // bump when index.html / questions.json change
+const IMG_CACHE   = 'exam-img-v1';      // bump if you want to flush image cache
 
+// Pre-cache the app shell (small, critical files only)
 self.addEventListener('install', (e) => {
-  self.skipWaiting();
   e.waitUntil(
-    caches.open(CACHE).then((c) =>
+    caches.open(SHELL_CACHE).then(c =>
       c.addAll([
-        './',
+        './',                 // GitHub Pages root of this app
         './index.html',
-        './questions.json',            // no query string
-        './images/vu1.jpeg',
-        './images/vu2.jpeg',
-        './images/vu3.jpeg',
-        './images/vu4.jpeg',
-        './images/vu5.jpg',
-        './images/vu6.jpg',
-        './images/vu7.jpg',
-        './images/vu8.jpg',
-        './images/vu9.jpg',
-        './images/vu10.jpg',
-        './images/vu11.jpg',
-        './images/vu12.jpg',
-        './images/vu13.jpg',
-        './images/vu14.jpg',
-        './images/vu15.jpg',
-        './images/vu16.jpg',
-        './images/vu17.jpg',
-        './images/vu18.jpg',
-        './images/vu19.jpg',
-        './images/vu20.jpg',
-        './images/vu21.jpg',
-        './images/vu22.jpg',
-        './images/vu23.jpg',
-        './images/vu24.jpg',
-        './images/vu25.jpg',
-        './images/vu26.jpg',
-        './images/vu27.jpg',
+        './questions.json',   // you already version it with ?v=..., still fine to keep here
       ])
     )
   );
+  self.skipWaiting();
 });
 
+// Clean old caches
 self.addEventListener('activate', (e) => {
-  e.waitUntil(
-    caches.keys().then((keys) =>
-      Promise.all(keys.filter((k) => k !== CACHE).map((k) => caches.delete(k)))
-    )
-  );
-  self.clients.claim();
+  e.waitUntil((async () => {
+    const keep = new Set([SHELL_CACHE, IMG_CACHE]);
+    const keys = await caches.keys();
+    await Promise.all(keys.filter(k => !keep.has(k)).map(k => caches.delete(k)));
+    await self.clients.claim();
+  })());
 });
 
+// Helper: keep image cache from growing forever (FIFO-ish)
+async function trimCache(cacheName, maxEntries = 1500) {
+  const cache = await caches.open(cacheName);
+  const keys = await cache.keys();
+  if (keys.length > maxEntries) {
+    // delete oldest until under the cap
+    await cache.delete(keys[0]);
+    return trimCache(cacheName, maxEntries);
+  }
+}
+
+// Runtime caching:
+// - For any request where request.destination === 'image':
+//   cache-first: return cached if present; else fetch, store, return.
 self.addEventListener('fetch', (e) => {
-  e.respondWith(caches.match(e.request).then((r) => r || fetch(e.request)));
+  const req = e.request;
+
+  // Cache ALL images on-demand
+  if (req.destination === 'image') {
+    e.respondWith((async () => {
+      const cache = await caches.open(IMG_CACHE);
+      const hit = await cache.match(req);
+      if (hit) return hit;               // offline after first view
+
+      try {
+        const res = await fetch(req, { cache: 'no-store' });
+        // only cache OK responses (not errors/opaques without CORS)
+        if (res && res.status === 200 && (res.type === 'basic' || res.type === 'cors')) {
+          cache.put(req, res.clone());
+          trimCache(IMG_CACHE, 1500);    // adjust cap if needed
+        }
+        return res;
+      } catch (err) {
+        // Network failed and not cached -> let it fail (or return a fallback image if you add one)
+        return new Response('Image fetch failed', { status: 504, statusText: 'Gateway Timeout' });
+      }
+    })());
+    return;
+  }
+
+  // Default: let the browser handle other requests normally.
 });
