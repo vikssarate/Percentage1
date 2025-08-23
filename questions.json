@@ -132,7 +132,7 @@
   "options": ["a", "b", "c", "d"],
   "answer": 1 },
         { "section": "type 2",
-    "text": "<img src=\"./images/vu4.jpg\" alt='Simply supported beam with UDL' style='max-width:100%;height:auto;'>"
+    "text": "<img src=\"./images/vu4.jpeg\" alt='Simply supported beam with UDL' style='max-width:100%;height:auto;'>"
   "options": ["a", "b", "c", "d"],
   "answer": 1 },
         { "section": "type 2",
