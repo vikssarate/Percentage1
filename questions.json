@@ -51,6 +51,18 @@
     "answer": 1
   },
   {
+    "id": "type2-img_0779",
+    "section": "type 2",
+    "text": "<img src=\"./images/Type 1/IMG_0779.jpeg\" style=\"max-width:100%;height:auto;\">",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "answer": 1
+  },
+  {
     "id": "type2-img_2284",
     "section": "type 2",
     "text": "<img src=\"./images/Type 1/IMG_2284.jpeg\" style=\"max-width:100%;height:auto;\">",
