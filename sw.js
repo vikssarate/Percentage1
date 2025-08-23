@@ -1,4 +1,4 @@
-const CACHE = 'exam-practice-v75';
+const CACHE = 'exam-practice-v76';
 
 self.addEventListener('install', (e) => {
   self.skipWaiting();
@@ -27,6 +27,14 @@ self.addEventListener('install', (e) => {
         './images/vu17.jpg',
         './images/vu18.jpg',
         './images/vu19.jpg',
+        './images/vu20.jpg',
+        './images/vu21.jpg',
+        './images/vu22.jpg',
+        './images/vu23.jpg',
+        './images/vu24.jpg',
+        './images/vu25.jpg',
+        './images/vu26.jpg',
+        './images/vu27.jpg',
       ])
     )
   );
