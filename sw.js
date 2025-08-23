@@ -1,34 +1,46 @@
-const CACHE = 'exam-practice-v74';
+const CACHE = 'exam-practice-v75';
 
-self.addEventListener('install', e => {
+self.addEventListener('install', (e) => {
   self.skipWaiting();
   e.waitUntil(
-    caches.open(CACHE).then(c => c.addAll([
-      './',
-      './index.html',
-      './questions.json',            // << no query
-      './images/vu1.jpeg',
-      './images/vu2.jpeg',
-      './images/vu3.jpeg',
-      './images/vu4.jpeg',
-      './images/vu5.jpg',
-      './images/vu6.jpg',
-      './images/vu7.jpg'
-    ]))
+    caches.open(CACHE).then((c) =>
+      c.addAll([
+        './',
+        './index.html',
+        './questions.json',            // no query string
+        './images/vu1.jpeg',
+        './images/vu2.jpeg',
+        './images/vu3.jpeg',
+        './images/vu4.jpeg',
+        './images/vu5.jpg',
+        './images/vu6.jpg',
+        './images/vu7.jpg',
+        './images/vu8.jpg',
+        './images/vu9.jpg',
+        './images/vu10.jpg',
+        './images/vu11.jpg',
+        './images/vu12.jpg',
+        './images/vu13.jpg',
+        './images/vu14.jpg',
+        './images/vu15.jpg',
+        './images/vu16.jpg',
+        './images/vu17.jpg',
+        './images/vu18.jpg',
+        './images/vu19.jpg',
+      ])
+    )
   );
 });
 
-self.addEventListener('activate', e => {
+self.addEventListener('activate', (e) => {
   e.waitUntil(
-    caches.keys().then(keys =>
-      Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k)))
+    caches.keys().then((keys) =>
+      Promise.all(keys.filter((k) => k !== CACHE).map((k) => caches.delete(k)))
     )
   );
   self.clients.claim();
 });
 
-self.addEventListener('fetch', e => {
-  e.respondWith(
-    caches.match(e.request /*, { ignoreSearch: true }*/).then(r => r || fetch(e.request))
-  );
+self.addEventListener('fetch', (e) => {
+  e.respondWith(caches.match(e.request).then((r) => r || fetch(e.request)));
 });
