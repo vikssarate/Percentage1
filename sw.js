@@ -1,53 +1,51 @@
 // sw.js — shell precache + runtime cache for ALL images
 
-// NOTE: Your CI stamps this to the latest commit SHA so you don't have to bump it manually.
-const SHELL_CACHE = 'exam-shell-v{{SHA}}';
+// No more manual bumps: your CI adds ?v=<SHA> to questions.json in index.html.
+// Keep this a simple, stable name.
+const SHELL_CACHE = 'exam-shell-v1';
 const IMG_CACHE   = 'exam-img-v1';
 
-// Pre-cache the app shell (small, critical files only)
-// IMPORTANT: Do NOT include questions.json here.
-self.addEventListener('install', (e) => {
-  e.waitUntil(
-    caches.open(SHELL_CACHE).then((c) =>
-      c.addAll([
-        './',          // GitHub Pages root of this app
-        './index.html' // shell only; questions.json is versioned and loaded at runtime
+// Pre-cache only the tiny app shell (NOT questions.json)
+self.addEventListener('install', (event) => {
+  event.waitUntil(
+    caches.open(SHELL_CACHE).then((cache) =>
+      cache.addAll([
+        './',          // GitHub Pages root
+        './index.html' // shell only; questions.json is fetched with a versioned URL
       ])
     )
   );
   self.skipWaiting();
 });
 
-// Clean old caches on activate
-self.addEventListener('activate', (e) => {
-  e.waitUntil((async () => {
+self.addEventListener('activate', (event) => {
+  event.waitUntil((async () => {
     const keep = new Set([SHELL_CACHE, IMG_CACHE]);
     const keys = await caches.keys();
-    await Promise.all(keys.filter(k => !keep.has(k)).map(k => caches.delete(k)));
+    await Promise.all(keys.filter((k) => !keep.has(k)).map((k) => caches.delete(k)));
     await self.clients.claim();
   })());
 });
 
-// Helper: keep image cache from growing forever (FIFO-ish)
+// Keep the image cache from growing forever (FIFO-ish)
 async function trimCache(cacheName, maxEntries = 1500) {
   const cache = await caches.open(cacheName);
   const keys  = await cache.keys();
   if (keys.length > maxEntries) {
-    await cache.delete(keys[0]);        // delete oldest
-    return trimCache(cacheName, maxEntries);
+    await cache.delete(keys[0]);            // delete oldest
+    return trimCache(cacheName, maxEntries); // keep trimming until under cap
   }
 }
 
-// Runtime caching:
-// • Images: cache-first. First view needs network; after that it's offline.
-self.addEventListener('fetch', (e) => {
-  const req = e.request;
+// Runtime caching: cache-first for ALL images
+self.addEventListener('fetch', (event) => {
+  const req = event.request;
 
   if (req.destination === 'image') {
-    e.respondWith((async () => {
+    event.respondWith((async () => {
       const cache = await caches.open(IMG_CACHE);
       const hit   = await cache.match(req);
-      if (hit) return hit; // serve cached (offline)
+      if (hit) return hit;                  // serve cached (offline)
 
       try {
         const res = await fetch(req, { cache: 'no-store' });
@@ -63,5 +61,5 @@ self.addEventListener('fetch', (e) => {
     return;
   }
 
-  // Default: let the browser handle other requests normally
+  // Default: let the browser handle non-image requests normally
 });
