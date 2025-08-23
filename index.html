@@ -202,7 +202,7 @@ const state = {
 
 /* ========= Load questions ========= */
 async function loadQuestions() {
-  const res = await fetch('questions.json?v=d4c38b4'); // your cache-busted URL
+  const res = await fetch('questions.json?v=6d92c16'); // your cache-busted URL
   const data = await res.json();
   state.tests = Array.isArray(data)
     ? [{ id:'demo', title:'Demo Test', durationMinutes:30, negative:0.25, questions:data }]
