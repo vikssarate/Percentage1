@@ -40,6 +40,13 @@ hr{border:none;border-top:1px solid var(--border);margin:12px 0}
 .tab{border:1px solid var(--border);border-radius:999px;padding:6px 10px;font-size:13px;cursor:pointer}
 .tab.active{background:var(--accent);color:#fff;border-color:transparent}
 .badge.sec{margin-left:8px;background:color-mix(in oklab,var(--good),white 18%)}
+
+/* ✅ Solution panel */
+.solution{margin-top:12px;border:1px solid var(--border);border-radius:12px;padding:12px;background:color-mix(in oklab,var(--card),white 4%)}
+.solution[open]{border-color:#c7d2fe;background:color-mix(in oklab,var(--card),white 8%)}
+.d-none{display:none}
+.sol-imgs{display:grid;gap:10px;margin-top:8px}
+.sol-imgs img{max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px}
 </style>
 </head>
 <body>
@@ -67,6 +74,12 @@ hr{border:none;border-top:1px solid var(--border);margin:12px 0}
       <h3 class="qtitle" id="qHead">Q1.</h3>
       <div id="qText"></div>
       <div class="options" id="optWrap"></div>
+
+      <!-- ✅ View Solution panel (added) -->
+      <details id="solutionPanel" class="solution d-none">
+        <summary>View Solution</summary>
+        <div id="solutionContent"></div>
+      </details>
 
       <div class="controls">
         <button id="clearBtn">Clear</button>
@@ -163,7 +176,10 @@ const state = {
 
   // Sections
   section: 'All',         // current section filter
-  sectionIndexMap: []     // array of GLOBAL indexes included in current section
+  sectionIndexMap: [],    // array of GLOBAL indexes included in current section
+
+  // ✅ Show solutions only after submit
+  submitted: false
 };
 
 /* ========= Load questions ========= */
@@ -191,6 +207,8 @@ const info        = $('#info');
 const timerEl     = $('#timer');
 const remain      = $('#remain');
 const sectionTabs = $('#sectionTabs');
+const solutionPanel   = $('#solutionPanel');
+const solutionContent = $('#solutionContent');
 
 /* ========= Helpers ========= */
 const fmt=t=>String(t).padStart(2,'0');
@@ -249,6 +267,7 @@ function startTest(t){
   state.section='All';
   state.startTs=Date.now();
   state.endTs=state.startTs + t.durationMinutes*60*1000;
+  state.submitted=false; // ✅ reset
 
   testList.style.display='none';
   resultArea.style.display='none';
@@ -285,14 +304,14 @@ function renderQuestion(){
   qHead.textContent=`Q${state.idx+1}.`;
   qText.innerHTML=q.text;
 
-// NEW: show optional figure
-if (q.image) {
+  // NEW: optional separate figure support
+  if (q.image) {
     const img = document.createElement('img');
     img.src = q.image;
     img.alt = 'figure';
     img.loading = 'lazy';
     qText.appendChild(img);
-}
+  }
 
   // Options (store by q.id if present)
   optWrap.innerHTML='';
@@ -311,7 +330,37 @@ if (q.image) {
     };
     optWrap.appendChild(btn);
   });
+
+  // ✅ Render solution (hidden until submitted)
+  renderSolution(q);
 }
+
+function renderSolution(q){
+  // Fill content
+  const solText = q.explain || q.solution_html || '';
+  let html = solText ? `<div class="sol-text">${solText}</div>` : '';
+
+  const imgs = Array.isArray(q.solution_images)
+    ? q.solution_images
+    : (q.solution_img ? [q.solution_img] : []);
+
+  if (imgs.length){
+    html += `<div class="sol-imgs">` +
+      imgs.map((src,i)=>`<img loading="lazy" src="${src}" alt="Solution image ${i+1}">`).join('') +
+      `</div>`;
+  }
+
+  solutionContent.innerHTML = html || '<em>No solution provided.</em>';
+
+  // Show only after Submit
+  if (state.submitted) {
+    solutionPanel.classList.remove('d-none');
+  } else {
+    solutionPanel.classList.add('d-none');
+  }
+  solutionPanel.open = false; // collapsed by default per question
+}
+
 function renderPalette(){
   const list=state.activeTest.questions;
   palette.innerHTML='';
@@ -355,6 +404,7 @@ $('#submitBtn').onclick=()=>submitTest();
 /* ========= Submit / Review / Export ========= */
 function submitTest(){
   clearInterval(state.timer);
+  state.submitted = true; // ✅ enable solutions in review
   const t=state.activeTest;
   const neg=t.negative || 0;
   let score=0, correct=0, wrong=0, unattempt=0;
@@ -373,22 +423,22 @@ function submitTest(){
     `<p><b>Score:</b> ${score.toFixed(2)} / ${total}</p>
      <p><b>Correct:</b> ${correct}, <b>Wrong:</b> ${wrong}, <b>Unattempted:</b> ${unattempt}</p>
      <p><b>Time:</b> ${fmtHMS(Math.floor((Date.now()-state.startTs)/1000))}</p>`;
-  examArea.style.display='none';examArea.style.display = 'none';
+  examArea.style.display='none';
 
-// Save attempt
-recordAttempt({
-  when: new Date().toISOString(),
-  testId: (state.activeTest && state.activeTest.title) || 'Noun Test',
-  score: score,
-  total: total,
-  correct: correct,
-  wrong: wrong,
-  unattempted: unattempt,
-  timeSec: Math.floor((Date.now() - state.startTs) / 1000)
-});
+  // Save attempt
+  recordAttempt({
+    when: new Date().toISOString(),
+    testId: (state.activeTest && state.activeTest.title) || 'Noun Test',
+    score: score,
+    total: total,
+    correct: correct,
+    wrong: wrong,
+    unattempted: unattempt,
+    timeSec: Math.floor((Date.now() - state.startTs) / 1000)
+  });
 
-// Refresh the recent attempts list
-renderRecentAttempts((state.activeTest && state.activeTest.title) || 'Noun Test');
+  // Refresh the recent attempts list
+  renderRecentAttempts((state.activeTest && state.activeTest.title) || 'Noun Test');
 
   resultArea.style.display='block';
 }
