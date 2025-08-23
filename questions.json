@@ -249,7 +249,16 @@
         { "section": "type 2",
     "text": "<img src=\"./images/vu33.jpg\" alt=\"beam\" style=\"max-width:100%;height:auto;\">",
   "options": ["a", "b", "c", "d"],
-  "answer": 1 }
+  "answer": 1 },
+        {
+  "id": "type2-vu15",
+  "section": "type 2",
+  "text": "<img src=\"./images/vu27.jpg\" style=\"max-width:100%;height:auto;\">",
+  "options": ["a","b","c","d"],
+  "answer": 2,
+  "solution_img": "./images/solutions/mp-shortcut.jpg",
+  "solution_captions": ["Marked price: derive & apply"]
+}
   ]
 }
   ]
