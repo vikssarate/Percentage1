@@ -8,12 +8,11 @@ self.addEventListener('install', e => {
             './',
             './index.html',
             './questions.json?v=img68', // 🔹 Also bump query param to force reload of JSON
-            './images/beam_ud1.png',
-            './images/Vu_m.png',
+        
             './images/vu1.jpeg',
             './images/vu2.jpeg',
             './images/vu3.jpeg',
-            './images/vu4.jpg',
+            './images/vu4.jpeg',
             './images/vu5.jpg',
             './images/vu6.jpg',
             './images/vu7.jpg'
