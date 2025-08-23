@@ -8,7 +8,8 @@ self.addEventListener('install', (e) => {
     caches.open(SHELL_CACHE).then(c =>
       c.addAll([
         './',                 // GitHub Pages root of this app
-        './index.html'
+        './index.html',
+        './questions.json'
         
       ])
     )
