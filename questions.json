@@ -1,269 +1,329 @@
-{
-  "tests": [
-    {
-      "id": "Aptitude1",
-      "title": "Percentage",
-      "durationMinutes": 30,
-      "negative": 0.25,
-      "questions": [
+[
   {
-    "section": "type 1",
-    "text": "A number is first increased by 20% and then reduced by 15%. If the final value is 2040, then what is the initial value of the number?",
+    "id": "type2-vu1",
+    "section": "type 2",
+    "text": "<img src=\"./images/vu1.jpeg\" style=\"max-width:100%;height:auto;\">",
     "options": [
-      "2100",
-      "1800",
-      "2000",
-      "1900"
+      "a",
+      "b",
+      "c",
+      "d"
     ],
-    "answer": 3,
-    "explain": "Let the number be x. After 20% increase → 1.2x. After 15% decrease → 1.2x × 0.85 = 1.02x. So 1.02x = 2040 → x = 2000."
+    "answer": 1
   },
   {
-    "section": "type 1",
-    "text": "Due to 20% reduction in the price of wheat per kg, Ram is able to buy 5 kg more for Rs. 800. What is the original quantity (in kg) of wheat?",
+    "id": "type2-vu2",
+    "section": "type 2",
+    "text": "<img src=\"./images/vu2.jpeg\" style=\"max-width:100%;height:auto;\">",
     "options": [
-      "50",
-      "20",
-      "40",
-      "30"
+      "a",
+      "b",
+      "c",
+      "d"
     ],
-    "answer": 4,
-    "explain": "Let price = p. Original quantity = 800/p. New price = 0.8p → New quantity = 800/(0.8p) = 1000/p. Difference = 1000/p - 800/p = 200/p = 5 → p = 40. Original quantity = 800/40 = 20 kg."
+    "answer": 1
   },
   {
-    "section": "type 1",
-    "text": "Ramesh invested 30% more than Suresh. Suresh invested 40% less than Arun, who invested ₹8000. The total amount invested by all of them together is?",
+    "id": "type2-vu3",
+    "section": "type 2",
+    "text": "<img src=\"./images/vu3.jpeg\" style=\"max-width:100%;height:auto;\">",
     "options": [
-      "₹19,020",
-      "₹18,020",
-      "₹19,040",
-      "₹19,080"
+      "a",
+      "b",
+      "c",
+      "d"
     ],
-    "answer": 3,
-    "explain": "Arun = 8000. Suresh = 60% of 8000 = 4800. Ramesh = 130% of 4800 = 6240. Total = 8000+4800+6240 = 19,040."
+    "answer": 1
   },
   {
-    "section": "type 1",
-    "text": "Two numbers are respectively, 17% and 50% more than a third number. The ratio of the two numbers is:",
+    "id": "type2-vu4",
+    "section": "type 2",
+    "text": "<img src=\"./images/vu4.jpeg\" style=\"max-width:100%;height:auto;\">",
     "options": [
-      "39 : 50",
-      "50 : 39",
-      "59 : 39",
-      "39 : 59"
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "answer": 1
+  },
+  {
+    "id": "type2-vu5",
+    "section": "type 2",
+    "text": "<img src=\"./images/vu5.jpg\" style=\"max-width:100%;height:auto;\">",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "answer": 1
+  },
+  {
+    "id": "type2-vu6",
+    "section": "type 2",
+    "text": "<img src=\"./images/vu6.jpg\" style=\"max-width:100%;height:auto;\">",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "answer": 1
+  },
+  {
+    "id": "type2-vu7",
+    "section": "type 2",
+    "text": "<img src=\"./images/vu7.jpg\" style=\"max-width:100%;height:auto;\">",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "answer": 1
+  },
+  {
+    "id": "type2-vu8",
+    "section": "type 2",
+    "text": "<img src=\"./images/vu8.jpg\" style=\"max-width:100%;height:auto;\">",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "answer": 1
+  },
+  {
+    "id": "type2-vu9",
+    "section": "type 2",
+    "text": "<img src=\"./images/vu9.jpg\" style=\"max-width:100%;height:auto;\">",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "answer": 1
+  },
+  {
+    "id": "type2-vu10",
+    "section": "type 2",
+    "text": "<img src=\"./images/vu10.jpg\" style=\"max-width:100%;height:auto;\">",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "answer": 1
+  },
+  {
+    "id": "type2-vu11",
+    "section": "type 2",
+    "text": "<img src=\"./images/vu11.jpg\" style=\"max-width:100%;height:auto;\">",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "answer": 1
+  },
+  {
+    "id": "type2-vu12",
+    "section": "type 2",
+    "text": "<img src=\"./images/vu12.jpg\" style=\"max-width:100%;height:auto;\">",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "answer": 1
+  },
+  {
+    "id": "type2-vu13",
+    "section": "type 2",
+    "text": "<img src=\"./images/vu13.jpg\" style=\"max-width:100%;height:auto;\">",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "answer": 1
+  },
+  {
+    "id": "type2-vu14",
+    "section": "type 2",
+    "text": "<img src=\"./images/vu14.jpg\" style=\"max-width:100%;height:auto;\">",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "answer": 1
+  },
+  {
+    "id": "type2-vu15",
+    "section": "type 2",
+    "text": "<img src=\"./images/vu15.jpg\" style=\"max-width:100%;height:auto;\">",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "answer": 1
+  },
+  {
+    "id": "type2-vu16",
+    "section": "type 2",
+    "text": "<img src=\"./images/vu16.jpg\" style=\"max-width:100%;height:auto;\">",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "answer": 1
+  },
+  {
+    "id": "type2-vu17",
+    "section": "type 2",
+    "text": "<img src=\"./images/vu17.jpg\" style=\"max-width:100%;height:auto;\">",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "answer": 1
+  },
+  {
+    "id": "type2-vu18",
+    "section": "type 2",
+    "text": "<img src=\"./images/vu18.jpg\" style=\"max-width:100%;height:auto;\">",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "answer": 1
+  },
+  {
+    "id": "type2-vu19",
+    "section": "type 2",
+    "text": "<img src=\"./images/vu19.jpg\" style=\"max-width:100%;height:auto;\">",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "answer": 1
+  },
+  {
+    "id": "type2-vu20",
+    "section": "type 2",
+    "text": "<img src=\"./images/vu20.jpg\" style=\"max-width:100%;height:auto;\">",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "answer": 1
+  },
+  {
+    "id": "type2-vu21",
+    "section": "type 2",
+    "text": "<img src=\"./images/vu21.jpg\" style=\"max-width:100%;height:auto;\">",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "answer": 1
+  },
+  {
+    "id": "type2-vu22",
+    "section": "type 2",
+    "text": "<img src=\"./images/vu22.jpg\" style=\"max-width:100%;height:auto;\">",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "answer": 1
+  },
+  {
+    "id": "type2-vu23",
+    "section": "type 2",
+    "text": "<img src=\"./images/vu23.jpg\" style=\"max-width:100%;height:auto;\">",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "answer": 1
+  },
+  {
+    "id": "type2-vu24",
+    "section": "type 2",
+    "text": "<img src=\"./images/vu24.jpg\" style=\"max-width:100%;height:auto;\">",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "answer": 1
+  },
+  {
+    "id": "type2-vu25",
+    "section": "type 2",
+    "text": "<img src=\"./images/vu25.jpg\" style=\"max-width:100%;height:auto;\">",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "answer": 1
+  },
+  {
+    "id": "type2-vu26",
+    "section": "type 2",
+    "text": "<img src=\"./images/vu26.jpg\" style=\"max-width:100%;height:auto;\">",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "answer": 1
+  },
+  {
+    "id": "type2-vu27",
+    "section": "type 2",
+    "text": "<img src=\"./images/vu27.jpg\" style=\"max-width:100%;height:auto;\">",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
     ],
     "answer": 1,
-    "explain": "Let the third number be 100. First = 117, second = 150. Ratio = 117 : 150 = 39 : 50."
-  },
-  {
-    "section": "type 1",
-    "text": "A, B and C are positive numbers such that A is 70% of B, and B is 40% of C. If the sum of all three numbers is 336, then 15% of the sum of B and C is:",
-    "options": [
-      "48",
-      "42",
-      "32",
-      "44"
-    ],
-    "answer": 2,
-    "explain": "Let C = 100. Then B = 40, A = 28. Ratio A:B:C = 28:40:100. Total = 168. Scaling factor = 336/168 = 2. So A=56, B=80, C=200. B+C=280 → 15% = 42."
-  },
-  {
-    "section": "type 1",
-    "text": "In an examination, 92% of the students passed and 480 students failed. How many students appeared in the examination?",
-    "options": [
-      "6000",
-      "5800",
-      "5000",
-      "6200"
-    ],
-    "answer": 1,
-    "explain": "Let total = x. Failed = 8% of x = 480 → x = 480×100/8 = 6000."
-  },
-  {
-    "section": "type 1",
-    "text": "When a number is increased by 24, it becomes 115% of itself. What is the number?",
-    "options": [
-      "160",
-      "250",
-      "100",
-      "200"
-    ],
-    "answer": 4,
-    "explain": "Let number = x. Equation: x + 24 = 1.15x → 0.15x = 24 → x = 160. (Check: 160+24=184, 115% of 160=184, correct.)"
-  },
-  {
-    "section": "type 1",
-    "text": "In an examination, A obtained 10% more marks than B, B obtained 20% more marks than C and C obtained 32% less marks than D. If A obtained 272 more marks than C, then the marks obtained by B is:",
-    "options": [
-      "850",
-      "1020",
-      "816",
-      "952"
-    ],
-    "answer": 2,
-    "explain": "Let D = 100. Then C = 68, B = 68×1.2 = 81.6, A = 81.6×1.1 = 89.76. A−C = 21.76 → 21.76k=272 → k=12.5. B=81.6×12.5=1020."
-  },
-  {
-    "section": "type 1",
-    "text": "In a class, if 60% of the students are boys and the number of girls is 36, then the number of boys is:",
-    "options": [
-      "58",
-      "65",
-      "60",
-      "54"
-    ],
-    "answer": 3,
-    "explain": "Girls = 40%. If 40% = 36, total = 90. Boys = 60% of 90 = 54."
-  },
-        { "section": "type 2",
-    "text": "<img src=\"./images/vu1.jpeg\" alt=\"beam\" style=\"max-width:100%;height:auto;\">",
-  "options": ["a", "b", "c", "d"],
-  "answer": 1 },
-        
-        { "section": "type 2",
-    "text": "<img src=\"./images/vu2.jpeg\" alt=\"beam\" style=\"max-width:100%;height:auto;\">",
-  "options": ["a", "b", "c", "d"],
-  "answer": 1 },
-        { "section": "type 2",
-    "text": "<img src=\"./images/vu3.jpeg\" alt=\"beam\" style=\"max-width:100%;height:auto;\">",
-  "options": ["a", "b", "c", "d"],
-  "answer": 1 },
-        { "section": "type 2",
-    "text": "<img src=\"./images/vu4.jpeg\" alt=\"beam\" style=\"max-width:100%;height:auto;\">",
-  "options": ["a", "b", "c", "d"],
-  "answer": 1 },
-        { "section": "type 2",
-    "text": "<img src=\"./images/vu5.jpg\" alt=\"beam\" style=\"max-width:100%;height:auto;\">",
-  "options": ["a", "b", "c", "d"],
-  "answer": 1 },
-        { "section": "type 2",
-    "text": "<img src=\"./images/vu6.jpg\" alt=\"beam\" style=\"max-width:100%;height:auto;\">",
-  "options": ["a", "b", "c", "d"],
-  "answer": 1 },
-        { "section": "type 2",
-    "text": "<img src=\"./images/vu7.jpg\" alt=\"beam\" style=\"max-width:100%;height:auto;\">",
-  "options": ["a", "b", "c", "d"],
-  "answer": 1 },
-        { "section": "type 2",
-    "text": "<img src=\"./images/vu8.jpg\" alt=\"beam\" style=\"max-width:100%;height:auto;\">",
-  "options": ["a", "b", "c", "d"],
-  "answer": 1 },
-        { "section": "type 2",
-    "text": "<img src=\"./images/vu9.jpg\" alt=\"beam\" style=\"max-width:100%;height:auto;\">",
-  "options": ["a", "b", "c", "d"],
-  "answer": 1 },
-        { "section": "type 2",
-    "text": "<img src=\"./images/vu10.jpg\" alt=\"beam\" style=\"max-width:100%;height:auto;\">",
-  "options": ["a", "b", "c", "d"],
-  "answer": 1 },
-        { "section": "type 2",
-    "text": "<img src=\"./images/vu11.jpg\" alt=\"beam\" style=\"max-width:100%;height:auto;\">",
-  "options": ["a", "b", "c", "d"],
-  "answer": 1 },
-        { "section": "type 2",
-    "text": "<img src=\"./images/vu12.jpg\" alt=\"beam\" style=\"max-width:100%;height:auto;\">",
-  "options": ["a", "b", "c", "d"],
-  "answer": 1 },
-        { "section": "type 2",
-    "text": "<img src=\"./images/vu13.jpg\" alt=\"beam\" style=\"max-width:100%;height:auto;\">",
-  "options": ["a", "b", "c", "d"],
-  "answer": 1 },
-        { "section": "type 2",
-    "text": "<img src=\"./images/vu14.jpg\" alt=\"beam\" style=\"max-width:100%;height:auto;\">",
-  "options": ["a", "b", "c", "d"],
-  "answer": 1 },
-        { "section": "type 2",
-    "text": "<img src=\"./images/vu15.jpg\" alt=\"beam\" style=\"max-width:100%;height:auto;\">",
-  "options": ["a", "b", "c", "d"],
-  "answer": 1 },
-        { "section": "type 2",
-    "text": "<img src=\"./images/vu16.jpg\" alt=\"beam\" style=\"max-width:100%;height:auto;\">",
-  "options": ["a", "b", "c", "d"],
-  "answer": 1 },
-        { "section": "type 2",
-    "text": "<img src=\"./images/vu17.jpg\" alt=\"beam\" style=\"max-width:100%;height:auto;\">",
-  "options": ["a", "b", "c", "d"],
-  "answer": 1 },
-        { "section": "type 2",
-    "text": "<img src=\"./images/vu18.jpg\" alt=\"beam\" style=\"max-width:100%;height:auto;\">",
-  "options": ["a", "b", "c", "d"],
-  "answer": 1 },
-        { "section": "type 2",
-    "text": "<img src=\"./images/vu19.jpg\" alt=\"beam\" style=\"max-width:100%;height:auto;\">",
-  "options": ["a", "b", "c", "d"],
-  "answer": 1 },{ "section": "type 2",
-    "text": "<img src=\"./images/vu20.jpg\" alt=\"beam\" style=\"max-width:100%;height:auto;\">",
-  "options": ["a", "b", "c", "d"],
-  "answer": 1 },
-        { "section": "type 2",
-    "text": "<img src=\"./images/vu21.jpg\" alt=\"beam\" style=\"max-width:100%;height:auto;\">",
-  "options": ["a", "b", "c", "d"],
-  "answer": 1 },
-        { "section": "type 2",
-    "text": "<img src=\"./images/vu22.jpg\" alt=\"beam\" style=\"max-width:100%;height:auto;\">",
-  "options": ["a", "b", "c", "d"],
-  "answer": 1 },
-        { "section": "type 2",
-    "text": "<img src=\"./images/vu23.jpg\" alt=\"beam\" style=\"max-width:100%;height:auto;\">",
-  "options": ["a", "b", "c", "d"],
-  "answer": 1 },
-        { "section": "type 2",
-    "text": "<img src=\"./images/vu24.jpg\" alt=\"beam\" style=\"max-width:100%;height:auto;\">",
-  "options": ["a", "b", "c", "d"],
-  "answer": 1 },
-        { "section": "type 2",
-    "text": "<img src=\"./images/vu25.jpg\" alt=\"beam\" style=\"max-width:100%;height:auto;\">",
-  "options": ["a", "b", "c", "d"],
-  "answer": 1 },
-        { "section": "type 2",
-    "text": "<img src=\"./images/vu26.jpg\" alt=\"beam\" style=\"max-width:100%;height:auto;\">",
-  "options": ["a", "b", "c", "d"],
-  "answer": 1 },
-        { "section": "type 2",
-    "text": "<img src=\"./images/vu27.jpg\" alt=\"beam\" style=\"max-width:100%;height:auto;\">",
-  "options": ["a", "b", "c", "d"],
-  "answer": 1,
- "solution_img": "./images/solutions/mp-shortcut.jpg",
-"solution_captions": ["Shortcut formula + worked steps"]
-        },
-        { "section": "type 2",
-    "text": "<img src=\"./images/vu28.jpg\" alt=\"beam\" style=\"max-width:100%;height:auto;\">",
-  "options": ["a", "b", "c", "d"],
-  "answer": 1 },
-        { "section": "type 2",
-    "text": "<img src=\"./images/vu28.jpg\" alt=\"beam\" style=\"max-width:100%;height:auto;\">",
-  "options": ["a", "b", "c", "d"],
-  "answer": 1 },
-        { "section": "type 2",
-    "text": "<img src=\"./images/vu29.jpg\" alt=\"beam\" style=\"max-width:100%;height:auto;\">",
-  "options": ["a", "b", "c", "d"],
-  "answer": 1 },
-        { "section": "type 2",
-    "text": "<img src=\"./images/vu30.jpg\" alt=\"beam\" style=\"max-width:100%;height:auto;\">",
-  "options": ["a", "b", "c", "d"],
-  "answer": 1 },
-        { "section": "type 2",
-    "text": "<img src=\"./images/vu31.jpg\" alt=\"beam\" style=\"max-width:100%;height:auto;\">",
-  "options": ["a", "b", "c", "d"],
-  "answer": 1 },
-        { "section": "type 2",
-    "text": "<img src=\"./images/vu32.jpg\" alt=\"beam\" style=\"max-width:100%;height:auto;\">",
-  "options": ["a", "b", "c", "d"],
-  "answer": 1 },
-        { "section": "type 2",
-    "text": "<img src=\"./images/vu33.jpg\" alt=\"beam\" style=\"max-width:100%;height:auto;\">",
-  "options": ["a", "b", "c", "d"],
-  "answer": 1 },
-        {
-  "id": "type2-vu15",
-  "section": "type 2",
-  "text": "<img src=\"./images/vu23.jpg\" style=\"max-width:100%;height:auto;\">",
-  "options": ["a","b","c","d"],
-  "answer": 2,
-  "solution_img": "./images/solutions/mp-shortcut.jpg",
-  "solution_captions": ["Marked price: derive & apply"]
-}
-  ]
-}
-  ]
-}
-  
+    "solution_images": [
+      "./images/solutions/vu27-sol.jpg"
+    ]
+  }
+]
