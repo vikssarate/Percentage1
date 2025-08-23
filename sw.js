@@ -1,5 +1,5 @@
 // sw (v1) for exam practice demo
-const CACHE = 'exam-practice-v63'; // 🔹 Bump version to v10 so old cache is replaced
+const CACHE = 'exam-practice-v66'; // 🔹 Bump version to v10 so old cache is replaced
 
 self.addEventListener('install', e => {
     self.skipWaiting();
@@ -7,12 +7,17 @@ self.addEventListener('install', e => {
         caches.open(CACHE).then(c => c.addAll([
             './',
             './index.html',
-            './questions.json?v=img63', // 🔹 Also bump query param to force reload of JSON
+            './questions.json?v=img66', // 🔹 Also bump query param to force reload of JSON
             './images/beam_ud1.png',
             './images/Vu_m.png',
             './images/vu1.jpeg',
             './images/vu2.jpeg',
-            './images/vu3.jpeg'
+            './images/vu3.jpeg',
+            './images/vu4.jpg',
+            './images/vu5.jpg',
+            './images/vu6.jpg',
+            './images/vu7.jpg'
+            
         ]))
     );
 });
