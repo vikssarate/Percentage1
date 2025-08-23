@@ -15,6 +15,18 @@
     ]
   },
   {
+    "id": "type2-img_2798",
+    "section": "type 2",
+    "text": "<img src=\"./images/IMG_2798.jpeg\" style=\"max-width:100%;height:auto;\">",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "answer": 1
+  },
+  {
     "id": "type2-img_2808",
     "section": "type 2",
     "text": "<img src=\"./images/IMG_2808.png\" style=\"max-width:100%;height:auto;\">",
