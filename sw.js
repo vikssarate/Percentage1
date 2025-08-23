@@ -1,5 +1,5 @@
 // sw.js  — shell precache + runtime cache for ALL images
-const SHELL_CACHE = 'exam-shell-v88';   // bump when index.html / questions.json change
+const SHELL_CACHE = 'exam-shell-v89';   // bump when index.html / questions.json change
 const IMG_CACHE   = 'exam-img-v1';      // bump if you want to flush image cache
 
 // Pre-cache the app shell (small, critical files only)
