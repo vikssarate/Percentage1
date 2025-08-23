@@ -55,6 +55,10 @@ hr{border:none;border-top:1px solid var(--border);margin:12px 0}
 /* ✅ Dialog lightbox */
 dialog{border:none;border-radius:12px;padding:12px;max-width:min(96vw,900px)}
 dialog::backdrop{background:rgba(0,0,0,.5)}
+
+/* ✅ Review highlights */
+.opt.correct  { outline:3px solid var(--good) !important; }   /* green */
+.opt.selected { outline:3px solid var(--accent) !important; } /* blue  */
 </style>
 </head>
 <body>
@@ -329,19 +333,33 @@ function renderQuestion(){
 
   // Options (store by q.id if present)
   optWrap.innerHTML='';
-  const key=q.id ?? state.idx;
+  const key = q.id ?? state.idx;
 
-  q.options.forEach((opt,i)=>{
-    const btn=document.createElement('button');
-    btn.className='opt';
-    btn.type='button';
-    btn.innerHTML=opt; // allow HTML in options
-    if(state.answers[key]===i) btn.classList.add('selected');
-    btn.onclick=()=>{
-      state.answers[key]=i;
+  q.options.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'opt';
+    btn.type = 'button';
+    btn.innerHTML = opt;
+
+    const isUser    = state.answers[key] === i;
+    const isCorrect = q.answer === i;
+
+    if (state.submitted) {
+      // Review mode
+      if (isCorrect)            btn.classList.add('correct');   // green
+      if (isUser && !isCorrect) btn.classList.add('selected');  // blue only if wrong
+    } else {
+      // During test
+      if (isUser) btn.classList.add('selected');                // blue
+    }
+
+    btn.onclick = () => {
+      if (state.submitted) return; // lock after submit
+      state.answers[key] = i;
       renderQuestion();
       renderPalette();
     };
+
     optWrap.appendChild(btn);
   });
 
