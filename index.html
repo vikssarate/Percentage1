@@ -45,8 +45,16 @@ hr{border:none;border-top:1px solid var(--border);margin:12px 0}
 .solution{margin-top:12px;border:1px solid var(--border);border-radius:12px;padding:12px;background:color-mix(in oklab,var(--card),white 4%)}
 .solution[open]{border-color:#c7d2fe;background:color-mix(in oklab,var(--card),white 8%)}
 .d-none{display:none}
+
+/* ✅ Solution images grid + captions + zoom cursor */
 .sol-imgs{display:grid;gap:10px;margin-top:8px}
-.sol-imgs img{max-width:100%;height:auto;border:1px solid var(--border);border-radius:8px}
+.sol-imgs figure{margin:0}
+.sol-imgs img{max-width:100%;height:auto;border:1px solid var(--border);border-radius:6px;cursor:zoom-in}
+.sol-imgs figcaption{font-size:.85rem;color:#6b7280;margin-top:4px}
+
+/* ✅ Dialog lightbox */
+dialog{border:none;border-radius:12px;padding:12px;max-width:min(96vw,900px)}
+dialog::backdrop{background:rgba(0,0,0,.5)}
 </style>
 </head>
 <body>
@@ -75,11 +83,19 @@ hr{border:none;border-top:1px solid var(--border);margin:12px 0}
       <div id="qText"></div>
       <div class="options" id="optWrap"></div>
 
-      <!-- ✅ View Solution panel (added) -->
+      <!-- ✅ View Solution panel -->
       <details id="solutionPanel" class="solution d-none">
         <summary>View Solution</summary>
         <div id="solutionContent"></div>
       </details>
+
+      <!-- ✅ Lightbox dialog for solution images -->
+      <dialog id="imgDlg">
+        <img id="imgDlgImg" alt="Solution image" style="max-width:100%;height:auto" />
+        <form method="dialog" style="text-align:right;margin-top:8px">
+          <button>Close</button>
+        </form>
+      </dialog>
 
       <div class="controls">
         <button id="clearBtn">Clear</button>
@@ -138,7 +154,7 @@ function recordAttempt(entry) {
   const keyId = entry.testId || 'default';
   const list = loadAttempts(keyId);
   list.push(entry);
-  if (list.length > 100) list.shift();   // keep it light
+  if (list.length > 100) list.shift();
   saveAttempts(keyId, list);
 }
 function fmtTime(s){ if(s==null) return '-'; const m=Math.floor(s/60), ss=s%60; return `${String(m).padStart(2,'0')}:${String(ss).padStart(2,'0')}`; }
@@ -148,7 +164,7 @@ function renderRecentAttempts(testId){
   const tbody = document.getElementById('attemptTableBody');
   if(!tbody) return;
   const all = loadAttempts(testId);
-  const lastSix = all.slice(-6).reverse(); // current + previous 5
+  const lastSix = all.slice(-6).reverse();
   if(!lastSix.length){ tbody.innerHTML = `<tr><td colspan="6">No attempts yet.</td></tr>`; return; }
   tbody.innerHTML = lastSix.map((a,i)=>`
     <tr>
@@ -167,19 +183,17 @@ function renderRecentAttempts(testId){
 const state = {
   tests: [],
   activeTest: null,
-  idx: 0,                 // current GLOBAL question index
+  idx: 0,
   answers: {},            // key(q.id ?? i) -> option index
-  review: {},             // key(q.id ?? i) -> true
+  review: {},
   startTs: null,
   endTs: null,
   timer: null,
 
-  // Sections
-  section: 'All',         // current section filter
-  sectionIndexMap: [],    // array of GLOBAL indexes included in current section
+  section: 'All',
+  sectionIndexMap: [],
 
-  // ✅ Show solutions only after submit
-  submitted: false
+  submitted: false        // ✅ gates solution visibility
 };
 
 /* ========= Load questions ========= */
@@ -267,7 +281,7 @@ function startTest(t){
   state.section='All';
   state.startTs=Date.now();
   state.endTs=state.startTs + t.durationMinutes*60*1000;
-  state.submitted=false; // ✅ reset
+  state.submitted=false;
 
   testList.style.display='none';
   resultArea.style.display='none';
@@ -304,7 +318,7 @@ function renderQuestion(){
   qHead.textContent=`Q${state.idx+1}.`;
   qText.innerHTML=q.text;
 
-  // NEW: optional separate figure support
+  // Optional separate figure support
   if (q.image) {
     const img = document.createElement('img');
     img.src = q.image;
@@ -336,29 +350,63 @@ function renderQuestion(){
 }
 
 function renderSolution(q){
-  // Fill content
-  const solText = q.explain || q.solution_html || '';
-  let html = solText ? `<div class="sol-text">${solText}</div>` : '';
+  const panel   = document.getElementById('solutionPanel');
+  const content = document.getElementById('solutionContent');
 
+  // text solution (supports 'explain' or 'solution_html' or 'solution')
+  const html = q.solution_html || q.explain || q.solution || '';
+  content.innerHTML = html || '<em>Solution not available.</em>';
+
+  // images (array or single)
   const imgs = Array.isArray(q.solution_images)
     ? q.solution_images
     : (q.solution_img ? [q.solution_img] : []);
+  const caps = Array.isArray(q.solution_captions) ? q.solution_captions : [];
 
   if (imgs.length){
-    html += `<div class="sol-imgs">` +
-      imgs.map((src,i)=>`<img loading="lazy" src="${src}" alt="Solution image ${i+1}">`).join('') +
-      `</div>`;
+    const wrap = document.createElement('div');
+    wrap.className = 'sol-imgs';
+
+    imgs.forEach((src, i) => {
+      const fig = document.createElement('figure');
+
+      // WebP + JPG/PNG fallback using same basename
+      const webp = src.replace(/\.(png|jpe?g|webp)$/i, '.webp');
+      fig.innerHTML = `
+        <picture>
+          <source srcset="${webp}" type="image/webp">
+          <img loading="lazy" src="${src}" alt="Solution image ${i+1}">
+        </picture>
+      `;
+
+      if (caps[i]){
+        const cap = document.createElement('figcaption');
+        cap.textContent = caps[i];
+        fig.appendChild(cap);
+      }
+
+      fig.querySelector('img').addEventListener('click', () => openLightbox(src));
+      wrap.appendChild(fig);
+    });
+
+    content.appendChild(wrap);
   }
 
-  solutionContent.innerHTML = html || '<em>No solution provided.</em>';
-
-  // Show only after Submit
+  // show only after submit/review
   if (state.submitted) {
-    solutionPanel.classList.remove('d-none');
+    panel.classList.remove('d-none');
   } else {
-    solutionPanel.classList.add('d-none');
+    panel.classList.add('d-none');
   }
-  solutionPanel.open = false; // collapsed by default per question
+  panel.open = false; // collapsed by default
+}
+
+/* Lightbox for solution images */
+function openLightbox(src){
+  const dlg = document.getElementById('imgDlg');
+  const im  = document.getElementById('imgDlgImg');
+  im.src = src;
+  dlg.showModal();
 }
 
 function renderPalette(){
@@ -409,7 +457,6 @@ function submitTest(){
   const neg=t.negative || 0;
   let score=0, correct=0, wrong=0, unattempt=0;
 
-  // Score across ALL questions
   t.questions.forEach((q,i)=>{
     const key=q.id ?? i;
     const a=state.answers[key];
@@ -419,13 +466,12 @@ function submitTest(){
   });
 
   const total=t.questions.length;
-  $('#resultSummary').innerHTML=
+  document.getElementById('resultSummary').innerHTML=
     `<p><b>Score:</b> ${score.toFixed(2)} / ${total}</p>
      <p><b>Correct:</b> ${correct}, <b>Wrong:</b> ${wrong}, <b>Unattempted:</b> ${unattempt}</p>
      <p><b>Time:</b> ${fmtHMS(Math.floor((Date.now()-state.startTs)/1000))}</p>`;
   examArea.style.display='none';
 
-  // Save attempt
   recordAttempt({
     when: new Date().toISOString(),
     testId: (state.activeTest && state.activeTest.title) || 'Noun Test',
@@ -437,18 +483,16 @@ function submitTest(){
     timeSec: Math.floor((Date.now() - state.startTs) / 1000)
   });
 
-  // Refresh the recent attempts list
   renderRecentAttempts((state.activeTest && state.activeTest.title) || 'Noun Test');
-
   resultArea.style.display='block';
 }
-$('#reviewBtn').onclick=()=>{
+document.getElementById('reviewBtn').onclick=()=>{
   state.idx=0;
   examArea.style.display='block';
   resultArea.style.display='none';
   renderQuestion(); renderPalette();
 };
-$('#exportBtn').onclick=()=>{
+document.getElementById('exportBtn').onclick=()=>{
   const payload={ test: state.activeTest?.id, answers: state.answers, review: state.review, ts: new Date().toISOString() };
   const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});
   const url=URL.createObjectURL(blob);
