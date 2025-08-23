@@ -127,6 +127,30 @@
     "text": "<img src='images/vu3.jpeg' alt='beam diagram' style='max-width:100%; height:auto;'>",
   "options": ["a", "b", "c", "d"],
   "answer": 1 }
+        { "section": "type 2",
+    "text": "<img src=\"./images/vu3.jpeg\" alt='Simply supported beam with UDL' style='max-width:100%;height:auto;'>"
+  "options": ["a", "b", "c", "d"],
+  "answer": 1 },
+        { "section": "type 2",
+    "text": "<img src=\"./images/vu4.jpg\" alt='Simply supported beam with UDL' style='max-width:100%;height:auto;'>"
+  "options": ["a", "b", "c", "d"],
+  "answer": 1 },
+        { "section": "type 2",
+    "text": "<img src=\"./images/vu5.jpg\" alt='Simply supported beam with UDL' style='max-width:100%;height:auto;'>"
+  "options": ["a", "b", "c", "d"],
+  "answer": 1 },
+        { "section": "type 2",
+    "text": "<img src=\"./images/vu6.jpg\" alt='Simply supported beam with UDL' style='max-width:100%;height:auto;'>"
+  "options": ["a", "b", "c", "d"],
+  "answer": 1 }
+        { "section": "type 2",
+    "text": "<img src=\"./images/vu7.jpg\" alt='Simply supported beam with UDL' style='max-width:100%;height:auto;'>"
+  "options": ["a", "b", "c", "d"],
+  "answer": 1 }
+
+
+
+
       
     
     
