@@ -4,9 +4,7 @@ on:
   push:
     paths:
       - 'images/**'
-      - 'data/answers.csv'
-      - 'data/text_questions.csv'
-      - 'data/pairs.csv'
+      - 'data/**'              # includes answers_min.csv, answers.csv, etc.
       - 'tools/**'
       - 'index.html'
       - 'sw.js'
@@ -17,7 +15,10 @@ permissions:
 
 jobs:
   build:
+    # Prevent loops when this workflow commits "Auto: rebuild..."
+    if: ${{ !contains(github.event.head_commit.message, 'Auto: rebuild questions') }}
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
 
@@ -25,33 +26,33 @@ jobs:
         with:
           node-version: '20'
 
-      # Build questions.json from your tools script
+      # 1) Build questions.json from your images/CSVs
       - name: Build questions.json
         run: node tools/build-questions.mjs
 
-      # Cache-bust: stamp the commit SHA into sw.js and the questions.json URL in index.html
+      # 2) Cache-bust: stamp commit SHA into sw.js + questions.json URL in index.html
       - name: Stamp cache/version
         shell: bash
         run: |
           set -e
           SHA=${GITHUB_SHA::7}
 
-          # bump the service worker cache name (supports single or double quotes)
+          # Update SHELL_CACHE in sw.js (handles single/double quotes)
           if [ -f sw.js ]; then
-            sed -i "s/const CACHE = 'exam-practice-v.*/const CACHE = 'exam-practice-v${SHA}';/" sw.js || true
-            sed -i 's/const CACHE *= *"exam-practice-v[^"]*"/const CACHE = "exam-practice-v'"${SHA}"'"/' sw.js || true
+            sed -E -i "s/(const[[:space:]]+SHELL_CACHE[[:space:]]*=[[:space:]]*['\"])exam-shell-v[0-9A-Za-z_-]+(['\"])/\1exam-shell-v${SHA}\2/" sw.js || true
           fi
 
-          # bump the ?v= on questions.json in index.html (forces fresh fetch)
+          # Update ?v= on questions.json in index.html to force fresh fetch
           if [ -f index.html ]; then
-            sed -i "s#questions.json?v=[a-zA-Z0-9._-]*#questions.json?v=${SHA}#g" index.html
+            sed -E -i "s#questions.json\\?v=[0-9A-Za-z._-]+#questions.json?v=${SHA}#g" index.html
           fi
 
-      # Commit the generated/updated files
+      # 3) Commit the generated/updated files
       - name: Commit updates
         run: |
-          git config user.name "github-actions"
+          SHA=${GITHUB_SHA::7}
+          git config user.name  "github-actions"
           git config user.email "actions@github.com"
           git add questions.json index.html sw.js
-          git commit -m "Auto: rebuild questions + cache-bust ${GITHUB_SHA::7}" || echo "No changes"
+          git commit -m "Auto: rebuild questions + cache-bust ${SHA}" || echo "No changes"
           git push
