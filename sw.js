@@ -11,7 +11,8 @@ self.addEventListener('install', (event) => {
     caches.open(SHELL_CACHE).then((cache) =>
       cache.addAll([
         './',          // GitHub Pages root
-        './index.html' // shell only; questions.json is fetched with a versioned URL
+        './index.html', // shell only; questions.json is fetched with a versioned URL
+        './questions.json'
       ])
     )
   );
