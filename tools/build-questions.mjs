@@ -2,13 +2,13 @@
 import {promises as fs} from 'fs';
 import path from 'path';
 
-const IMG_DIR    = 'images';
-const OUT        = 'questions.json';
+const IMG_DIR     = 'images';
+const OUT         = 'questions.json';
 const ANSWERS_CSV = 'data/answers.csv';      // optional (full metadata per image)
 const ANSWERS_MIN = 'data/answers_min.csv';  // optional (id/file + answer only)
 
-// Note: browsers typically don't render .heic/.heif; these are here so the
-// builder can see them if you keep originals. Prefer JPG/PNG/WEBP for web.
+// Note: include HEIC/HEIF so the builder can "see" originals,
+// but browsers typically can't render them. Prefer JPG/PNG/WEBP on the web.
 const exts = new Set(['.jpg', '.jpeg', '.png', '.webp', '.heic', '.heif']);
 const toUnix = p => p.replace(/\\/g,'/');
 
@@ -28,7 +28,7 @@ function parseCSV(txt){
   return rows.map(r => Object.fromEntries(cols.map((c,i) => [c, r[i] ?? ''])));
 }
 
-// --- helpers for answer parsing and basenames ---
+// --- helpers ---
 function toIndex(v){
   if (v == null) return null;
   const s = String(v).trim();
@@ -55,11 +55,11 @@ function baseNoExt(p){
 }
 
 function loadAnswerMap(csvRows){
-  // CSV columns supported here: file, answer, section, explain
-  // (Used for per-image metadata; answer is parsed via toIndex)
+  // CSV columns supported: file, answer, section, explain
+  // Normalize key to lowercase basename (no extension) to avoid case mismatches.
   const m = new Map();
   for (const row of csvRows) {
-    const base = path.basename(row.file || '', path.extname(row.file || ''));
+    const base = baseNoExt(row.file || ''); // <-- normalized lower-case
     m.set(base, {
       answer: (toIndex(row.answer) ?? 1),  // default to 1 (i.e., “b”) if missing
       section: row.section || 'type 2',
@@ -103,9 +103,11 @@ function solutionsFor(base){
 /* ------------ Build questions from images ------------ */
 const questions = [];
 for (const p of questionsImgs.sort((a,b) => a.localeCompare(b, undefined, { numeric: true }))) {
-  const base = baseNoExt(p);
+  const base = baseNoExt(p); // normalized lower-case
   const sols = solutionsFor(base);
-  const meta = answerMap.get(path.basename(p, path.extname(p))) || {};
+
+  // Lookup metadata with the same normalization as loadAnswerMap
+  const meta = answerMap.get(base) || {};
 
   const q = {
     id: `type2-${base}`,
@@ -154,7 +156,7 @@ try {
   const csv = await fs.readFile(ANSWERS_MIN, 'utf8');
   const rows = parseCSV(csv);
 
-  // Map: question image basename -> index in questions[]
+  // Map: question image basename (lowercase, no ext) -> index in questions[]
   const byBase = new Map();
   questions.forEach((q, i) => {
     const m = /src="\.?\/?([^"]+)"/.exec(q.text || '');
@@ -170,7 +172,7 @@ try {
       .split(/[;, ]/).map(x => x.trim()).filter(Boolean)
       .map(toIndex).filter(v => v !== null);
 
-    // 1) ID-based (works for text questions too)
+    // 1) ID-based (works for text questions too, if you append them)
     if (id) {
       const idx = questions.findIndex(q => (q.id || '').trim() === id);
       if (idx >= 0 && singleAns !== null) {
