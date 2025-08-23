@@ -1,4 +1,4 @@
-const CACHE = 'exam-practice-v73';
+const CACHE = 'exam-practice-v74';
 
 self.addEventListener('install', e => {
   self.skipWaiting();
