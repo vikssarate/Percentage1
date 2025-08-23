@@ -221,7 +221,10 @@
         { "section": "type 2",
     "text": "<img src=\"./images/vu27.jpg\" alt=\"beam\" style=\"max-width:100%;height:auto;\">",
   "options": ["a", "b", "c", "d"],
-  "answer": 1 },
+  "answer": 1,
+ "solution_img": "./images/solutions/mp-shortcut.jpg",
+"solution_captions": ["Shortcut formula + worked steps"]
+        },
         { "section": "type 2",
     "text": "<img src=\"./images/vu28.jpg\" alt=\"beam\" style=\"max-width:100%;height:auto;\">",
   "options": ["a", "b", "c", "d"],
