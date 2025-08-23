@@ -1,1 +1,29 @@
+name: Build questions.json
 
+on:
+  push:
+    paths:
+      - 'images/**'
+      - 'data/answers.csv'
+      - 'tools/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write   # ← needed to commit questions.json
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: node tools/build-questions.mjs
+      - name: Commit questions.json
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add questions.json
+          git commit -m "Auto-build questions.json" || echo "No changes"
+          git push
