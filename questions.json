@@ -115,36 +115,36 @@
     "explain": "Girls = 40%. If 40% = 36, total = 90. Boys = 60% of 90 = 54."
   },
         { "section": "type 2",
-    "text": "<img src='images/vu1.jpeg' alt='beam diagram' style='max-width:100%; height:auto;'>",
+    "text": "<img src=\"./images/vu1.jpeg\" alt=\"beam\" style=\"max-width:100%;height:auto;\">",
   "options": ["a", "b", "c", "d"],
   "answer": 1 },
         
         { "section": "type 2",
-    "text": "<img src='images/vu2.jpeg' alt='beam diagram' style='max-width:100%; height:auto;'>",
+    "text": "<img src=\"./images/vu2.jpeg\" alt=\"beam\" style=\"max-width:100%;height:auto;\">",
   "options": ["a", "b", "c", "d"],
   "answer": 1 },
         { "section": "type 2",
-    "text": "<img src='images/vu3.jpeg' alt='beam diagram' style='max-width:100%; height:auto;'>",
+    "text": "<img src=\"./images/vu3.jpeg\" alt=\"beam\" style=\"max-width:100%;height:auto;\">",
   "options": ["a", "b", "c", "d"],
   "answer": 1 },
         { "section": "type 2",
-    "text": "<img src=\"./images/vu3.jpeg\" alt='Simply supported beam with UDL' style='max-width:100%;height:auto;'>"
+    "text": "<img src=\"./images/vu4.jpeg\" alt=\"beam\" style=\"max-width:100%;height:auto;\">",
   "options": ["a", "b", "c", "d"],
   "answer": 1 },
         { "section": "type 2",
-    "text": "<img src=\"./images/vu4.jpeg\" alt='Simply supported beam with UDL' style='max-width:100%;height:auto;'>"
+    "text": "<img src=\"./images/vu5.jpg\" alt=\"beam\" style=\"max-width:100%;height:auto;\">",
   "options": ["a", "b", "c", "d"],
   "answer": 1 },
         { "section": "type 2",
-    "text": "<img src=\"./images/vu5.jpg\" alt='Simply supported beam with UDL' style='max-width:100%;height:auto;'>"
+    "text": "<img src=\"./images/vu6.jpg\" alt=\"beam\" style=\"max-width:100%;height:auto;\">",
   "options": ["a", "b", "c", "d"],
   "answer": 1 },
         { "section": "type 2",
-    "text": "<img src=\"./images/vu6.jpg\" alt='Simply supported beam with UDL' style='max-width:100%;height:auto;'>"
+    "text": "<img src=\"./images/vu7.jpg\" alt=\"beam\" style=\"max-width:100%;height:auto;\">",
   "options": ["a", "b", "c", "d"],
   "answer": 1 },
         { "section": "type 2",
-    "text": "<img src=\"./images/vu7.jpg\" alt='Simply supported beam with UDL' style='max-width:100%;height:auto;'>"
+    "text": "<img src=\"./images/vu8.jpg\" alt=\"beam\" style=\"max-width:100%;height:auto;\">",
   "options": ["a", "b", "c", "d"],
   "answer": 1 }   
   ]
