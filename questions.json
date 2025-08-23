@@ -1,5 +1,17 @@
 [
   {
+    "id": "type2-7F57D6E3-301E-4623-BDAD-DAC34882A2B1",
+    "section": "type 2",
+    "text": "<img src=\"./images/7F57D6E3-301E-4623-BDAD-DAC34882A2B1.png\" style=\"max-width:100%;height:auto;\">",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "answer": 1
+  },
+  {
     "id": "type2-IMG_2796",
     "section": "type 2",
     "text": "<img src=\"./images/IMG_2796.jpeg\" style=\"max-width:100%;height:auto;\">",
