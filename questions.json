@@ -1,6 +1,6 @@
 [
   {
-    "id": "type2-IMG_2796",
+    "id": "type2-img_2796",
     "section": "type 2",
     "text": "<img src=\"./images/IMG_2796.jpeg\" style=\"max-width:100%;height:auto;\">",
     "options": [
@@ -15,7 +15,7 @@
     ]
   },
   {
-    "id": "type2-IMG_2808",
+    "id": "type2-img_2808",
     "section": "type 2",
     "text": "<img src=\"./images/IMG_2808.png\" style=\"max-width:100%;height:auto;\">",
     "options": [
@@ -60,7 +60,7 @@
       "c",
       "d"
     ],
-    "answer": 1
+    "answer": 0
   },
   {
     "id": "type2-vu4",
@@ -72,7 +72,7 @@
       "c",
       "d"
     ],
-    "answer": 1
+    "answer": 0
   },
   {
     "id": "type2-vu5",
@@ -84,7 +84,7 @@
       "c",
       "d"
     ],
-    "answer": 1
+    "answer": 0
   },
   {
     "id": "type2-vu6",
@@ -96,7 +96,7 @@
       "c",
       "d"
     ],
-    "answer": 1
+    "answer": 0
   },
   {
     "id": "type2-vu7",
@@ -108,7 +108,7 @@
       "c",
       "d"
     ],
-    "answer": 1
+    "answer": 0
   },
   {
     "id": "type2-vu8",
@@ -120,7 +120,7 @@
       "c",
       "d"
     ],
-    "answer": 1
+    "answer": 0
   },
   {
     "id": "type2-vu9",
@@ -132,7 +132,7 @@
       "c",
       "d"
     ],
-    "answer": 1
+    "answer": 0
   },
   {
     "id": "type2-vu10",
@@ -144,7 +144,7 @@
       "c",
       "d"
     ],
-    "answer": 1
+    "answer": 0
   },
   {
     "id": "type2-vu11",
@@ -156,7 +156,7 @@
       "c",
       "d"
     ],
-    "answer": 1
+    "answer": 0
   },
   {
     "id": "type2-vu12",
@@ -168,7 +168,7 @@
       "c",
       "d"
     ],
-    "answer": 1
+    "answer": 0
   },
   {
     "id": "type2-vu13",
