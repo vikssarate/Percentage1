@@ -1,23 +1,24 @@
-// sw.js  — shell precache + runtime cache for ALL images
-const SHELL_CACHE = 'exam-shell-v89';   // bump when index.html / questions.json change
-const IMG_CACHE   = 'exam-img-v1';      // bump if you want to flush image cache
+// sw.js — shell precache + runtime cache for ALL images
+
+// NOTE: Your CI stamps this to the latest commit SHA so you don't have to bump it manually.
+const SHELL_CACHE = 'exam-shell-v{{SHA}}';
+const IMG_CACHE   = 'exam-img-v1';
 
 // Pre-cache the app shell (small, critical files only)
+// IMPORTANT: Do NOT include questions.json here.
 self.addEventListener('install', (e) => {
   e.waitUntil(
-    caches.open(SHELL_CACHE).then(c =>
+    caches.open(SHELL_CACHE).then((c) =>
       c.addAll([
-        './',                 // GitHub Pages root of this app
-        './index.html',
-        './questions.json'
-        
+        './',          // GitHub Pages root of this app
+        './index.html' // shell only; questions.json is versioned and loaded at runtime
       ])
     )
   );
   self.skipWaiting();
 });
 
-// Clean old caches
+// Clean old caches on activate
 self.addEventListener('activate', (e) => {
   e.waitUntil((async () => {
     const keep = new Set([SHELL_CACHE, IMG_CACHE]);
@@ -30,42 +31,37 @@ self.addEventListener('activate', (e) => {
 // Helper: keep image cache from growing forever (FIFO-ish)
 async function trimCache(cacheName, maxEntries = 1500) {
   const cache = await caches.open(cacheName);
-  const keys = await cache.keys();
+  const keys  = await cache.keys();
   if (keys.length > maxEntries) {
-    // delete oldest until under the cap
-    await cache.delete(keys[0]);
+    await cache.delete(keys[0]);        // delete oldest
     return trimCache(cacheName, maxEntries);
   }
 }
 
 // Runtime caching:
-// - For any request where request.destination === 'image':
-//   cache-first: return cached if present; else fetch, store, return.
+// • Images: cache-first. First view needs network; after that it's offline.
 self.addEventListener('fetch', (e) => {
   const req = e.request;
 
-  // Cache ALL images on-demand
   if (req.destination === 'image') {
     e.respondWith((async () => {
       const cache = await caches.open(IMG_CACHE);
-      const hit = await cache.match(req);
-      if (hit) return hit;               // offline after first view
+      const hit   = await cache.match(req);
+      if (hit) return hit; // serve cached (offline)
 
       try {
         const res = await fetch(req, { cache: 'no-store' });
-        // only cache OK responses (not errors/opaques without CORS)
         if (res && res.status === 200 && (res.type === 'basic' || res.type === 'cors')) {
           cache.put(req, res.clone());
-          trimCache(IMG_CACHE, 1500);    // adjust cap if needed
+          trimCache(IMG_CACHE, 1500);
         }
         return res;
-      } catch (err) {
-        // Network failed and not cached -> let it fail (or return a fallback image if you add one)
+      } catch {
         return new Response('Image fetch failed', { status: 504, statusText: 'Gateway Timeout' });
       }
     })());
     return;
   }
 
-  // Default: let the browser handle other requests normally.
+  // Default: let the browser handle other requests normally
 });
