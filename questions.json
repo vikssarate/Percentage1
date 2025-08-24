@@ -171,18 +171,6 @@
     "answer": 1
   },
   {
-    "id": "type2-vu10",
-    "section": "vu10.jpg",
-    "text": "<img src=\"./images/vu10.jpg\" style=\"max-width:100%;height:auto;\">",
-    "options": [
-      "a",
-      "b",
-      "c",
-      "d"
-    ],
-    "answer": 1
-  },
-  {
     "id": "type2-vu11",
     "section": "vu11.jpg",
     "text": "<img src=\"./images/vu11.jpg\" style=\"max-width:100%;height:auto;\">",
