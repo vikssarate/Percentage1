@@ -75,18 +75,6 @@
     "answer": 1
   },
   {
-    "id": "type2-vu1",
-    "section": "vu1.jpeg",
-    "text": "<img src=\"./images/vu1.jpeg\" style=\"max-width:100%;height:auto;\">",
-    "options": [
-      "a",
-      "b",
-      "c",
-      "d"
-    ],
-    "answer": 1
-  },
-  {
     "id": "type2-vu2",
     "section": "vu2.jpeg",
     "text": "<img src=\"./images/vu2.jpeg\" style=\"max-width:100%;height:auto;\">",
