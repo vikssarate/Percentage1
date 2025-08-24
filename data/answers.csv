@@ -1,1 +1,7 @@
-
+file,id,answer,link
+vu1..vu12,,0,
+,type2-vu14,1,https://youtu.be/abcdEFG1234
+IMG_2796,,,https://your-bucket.example.com/solutions/IMG_2796-sol.mp4
+images/Type1/q3.jpg,,2,https://drive.google.com/file/d/FILE_ID/view
+vu27,,c,https://youtu.be/hijkLMN5678;https://your-cdn.example.com/sol-vu27.mp4
+Type2/vu50.jpg,,d,
