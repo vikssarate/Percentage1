@@ -25,7 +25,7 @@
   },
   {
     "id": "type2-vu20",
-    "section": "Type 1",
+    "section": "type 2",
     "text": "<img src=\"./images/Type 1/vu20.jpg\" style=\"max-width:100%;height:auto;\">",
     "options": [
       "a",
@@ -33,7 +33,7 @@
       "c",
       "d"
     ],
-    "answer": 1
+    "answer": 0
   },
   {
     "id": "type2-img_2396",
