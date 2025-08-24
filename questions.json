@@ -24,6 +24,18 @@
     "answer": 1
   },
   {
+    "id": "type2-vu20",
+    "section": "Type 1",
+    "text": "<img src=\"./images/Type 1/vu20.jpg\" style=\"max-width:100%;height:auto;\">",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "answer": 1
+  },
+  {
     "id": "type2-img_2396",
     "section": "Type2",
     "text": "<img src=\"./images/Type2/IMG_2396.jpeg\" style=\"max-width:100%;height:auto;\">",
