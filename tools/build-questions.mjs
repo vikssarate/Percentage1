@@ -4,13 +4,14 @@ import path from 'path';
 
 const IMG_DIR      = 'images';
 const OUT          = 'questions.json';
-const ANSWERS_CSV  = 'data/answers.csv';      // optional: full metadata per image/id
-const ANSWERS_MIN  = 'data/answers_min.csv';  // optional: id/file answer overrides
+const ANSWERS_CSV  = 'data/answers.csv';      // optional: rich metadata
+const ANSWERS_MIN  = 'data/answers_min.csv';  // optional: lightweight overrides
 
-// Browsers render jpg/png/webp best; we still scan heic/heif if present
+// Image types to scan
 const exts   = new Set(['.jpg', '.jpeg', '.png', '.webp', '.heic', '.heif']);
 const toUnix = (p) => p.replace(/\\/g, '/');
 
+/* -------------------------------- IO -------------------------------- */
 async function walk(dir) {
   const out = [];
   for (const e of await fs.readdir(dir, { withFileTypes: true })) {
@@ -21,24 +22,51 @@ async function walk(dir) {
   return out;
 }
 
-function parseCSV(txt){
-  const rows = txt.trim().split(/\r?\n/).map(r => r.split(',').map(s => s.trim()));
-  const cols = rows.shift();
-  return rows.map(r => Object.fromEntries(cols.map((c,i) => [c, r[i] ?? ''])));
+/* ---------------------------- CSV parsing ---------------------------- */
+/** Split a CSV line by commas while respecting double quotes. */
+function splitCsvLine(line) {
+  const cells = [];
+  let cur = '';
+  let inQ = false;
+  for (let i = 0; i < line.length; i++) {
+    const ch = line[i];
+    if (ch === '"') {
+      if (inQ && line[i + 1] === '"') { cur += '"'; i++; }  // escaped quote
+      else inQ = !inQ;
+    } else if (ch === ',' && !inQ) {
+      cells.push(cur);
+      cur = '';
+    } else {
+      cur += ch;
+    }
+  }
+  cells.push(cur);
+  return cells.map(s => s.trim().replace(/^\uFEFF/, '')); // strip BOM if any
 }
 
-/* ---------------- helpers ---------------- */
+/** Parse CSV text into array of objects using header row. */
+function parseCSV(txt) {
+  const lines = txt.split(/\r?\n/).filter(l => l.trim().length > 0);
+  if (!lines.length) return [];
+  const header = splitCsvLine(lines[0]).map(h => h.toLowerCase());
+  const rows = [];
+  for (let i = 1; i < lines.length; i++) {
+    const cells = splitCsvLine(lines[i]);
+    const row = {};
+    for (let j = 0; j < header.length; j++) row[header[j]] = (cells[j] ?? '').trim();
+    rows.push(row);
+  }
+  return rows;
+}
+
+/* ----------------------------- helpers ------------------------------ */
 function toIndex(v){
   if (v == null) return null;
   const s = String(v).trim();
   if (!s) return null;
-
-  // letters a..d
   const letters = ['a','b','c','d'];
   const li = letters.indexOf(s.toLowerCase());
   if (li !== -1) return li;
-
-  // 0..3 or 1..4
   const n = Number(s);
   if (!Number.isNaN(n)) {
     if (n >= 0 && n <= 3) return n;
@@ -56,7 +84,7 @@ function splitList(s){
     .map(x => x.trim())
     .filter(Boolean);
 }
-// Infer section name from folder path (e.g., "images/Type 1/vu1.jpg" → "Type 1")
+// Section from top folder: "images/Type 1/vu1.jpg" -> "Type 1"
 function sectionFromPath(p){
   const rel = toUnix(p).replace(/^images\//i, '');
   const top = (rel.split('/')[0] || '').trim();
@@ -66,53 +94,51 @@ function sectionFromPath(p){
 
 /**
  * Load optional metadata from answers.csv
- * Supports columns (all optional):
- *   file,id,answer,section,text,explain,solution_images,video_link|video_links|link
- * Returns both byBase (keyed by file basename) and byId maps.
+ * Columns supported (use any subset):
+ *   file,id,answer,section,text,explain,solution_images,video_link,video_links,link
+ * Multiple URLs in a cell can be separated by comma or semicolon.
  */
 function loadAnswerMaps(csvRows){
   const byBase = new Map();
   const byId   = new Map();
-
   for (const row of csvRows) {
     const meta = {
-      answer:  (toIndex(row.answer) ?? 1), // default to "b"
+      answer:  (toIndex(row.answer) ?? 1),
       section: row.section || '',
       text:    row.text || '',
       explain: row.explain || row.solution_html || '',
-      solution_images: splitList(row.solution_images),
+      solution_images: splitList(row.solution_images || row.solution_image),
       video_links:     splitList(row.video_links || row.video_link || row.link)
     };
-
     const fileBase = row.file ? path.basename(row.file, path.extname(row.file)) : '';
     const idKey    = (row.id || '').trim();
-
     if (fileBase) byBase.set(fileBase, meta);
     if (idKey)    byId.set(idKey, meta);
   }
   return { byBase, byId };
 }
 
-/* ------------ scan images ------------ */
+/* ------------------------------ main -------------------------------- */
 const all = await walk(IMG_DIR);
 
 // All non-solution images = questions
 const questionsImgs = all.filter(p =>
   !/\/solutions\//i.test(p) && exts.has(path.extname(p).toLowerCase())
 );
-
-// All images (used to find matching solutions)
+// For solution image lookups
 const allImgs = all.filter(p => exts.has(path.extname(p).toLowerCase()));
 
-/* ------------ optional answers.csv metadata ------------ */
 let metaByBase = new Map();
 let metaById   = new Map();
 try {
   const txt = await fs.readFile(ANSWERS_CSV, 'utf8');
-  const maps = loadAnswerMaps(parseCSV(txt));
+  const rows = parseCSV(txt);
+  const maps = loadAnswerMaps(rows);
   metaByBase = maps.byBase;
   metaById   = maps.byId;
-} catch { /* answers.csv is optional */ }
+} catch {
+  // answers.csv is optional
+}
 
 function solutionsFor(base){
   const low = base.toLowerCase();
@@ -121,16 +147,15 @@ function solutionsFor(base){
     .sort();
 }
 
-/* ------------ build questions ------------ */
 const questions = [];
-for (const p of questionsImgs.sort((a,b) => a.localeCompare(b, undefined, { numeric: true }))) {
-  const base      = baseNoExt(p);
-  const sols      = solutionsFor(base);
-  const computedId= `type2-${base}`;
-  // Prefer id-based metadata (exact match), else file/basename-based
-  const metaId    = metaById.get(computedId) || null;
-  const metaFile  = metaByBase.get(path.basename(p, path.extname(p))) || {};
-  const meta      = metaId || metaFile;
+for (const p of questionsImgs.sort((a,b)=>a.localeCompare(b, undefined, { numeric:true }))) {
+  const base       = baseNoExt(p);
+  const sols       = solutionsFor(base);
+  const computedId = `type2-${base}`;
+
+  const metaId   = metaById.get(computedId) || null;
+  const metaFile = metaByBase.get(path.basename(p, path.extname(p))) || {};
+  const meta     = metaId || metaFile;
 
   const folderSec = sectionFromPath(p);
 
@@ -142,27 +167,27 @@ for (const p of questionsImgs.sort((a,b) => a.localeCompare(b, undefined, { nume
     answer:  (meta.answer ?? 1)
   };
 
-  // Images: discovered + CSV-provided (accept absolute/relative)
+  // Solution images: auto-discovered + CSV-specified
   if (sols.length) q.solution_images = sols.map(x => './' + x);
-  if (meta.solution_images?.length) {
+  if (meta.solution_images && meta.solution_images.length) {
     q.solution_images = (q.solution_images || []).concat(
       meta.solution_images.map(x => (x.startsWith('./') || x.startsWith('/')) ? x : './' + x)
     );
   }
 
-  // NEW: video links from CSV → solution_videos
-  if (meta.video_links?.length) q.solution_videos = meta.video_links;
+  // Solution videos from CSV (YouTube, Drive, MP4, etc.)
+  if (meta.video_links && meta.video_links.length) q.solution_videos = meta.video_links;
 
   if (meta.explain) q.solution_html = meta.explain;
 
   questions.push(q);
 }
 
-/* ------------ answers_min.csv overrides ------------ */
+/* ----------------------- answers_min overrides ---------------------- */
 /*
    Supports:
-     id,answer                     -> set answer by exact question id
-     file,answer                   -> same answer for list/range of basenames
+     id,answer                     -> set by exact question id
+     file,answer                   -> same answer for list/range
      file,answers                  -> sequence mapped to the range
    file may be:
      "vu1..vu12", "vu1-12", "vu27", "images/vu28.jpg", "vu03,vu05"
@@ -203,21 +228,14 @@ try {
   for (const r of rows){
     const id = (r.id || '').trim();
     const singleAns = toIndex(r.answer);
-    const seq = (r.answers || '')
-      .split(/[;, ]/).map(x => x.trim()).filter(Boolean)
-      .map(toIndex).filter(v => v !== null);
+    const seq = splitList(r.answers || '').map(toIndex).filter(v => v !== null);
 
-    // 1) ID-based (works for text questions too)
     if (id) {
       const idx = questions.findIndex(q => (q.id || '').trim() === id);
-      if (idx >= 0 && singleAns !== null) {
-        questions[idx].answer = singleAns;
-        applied++;
-      }
+      if (idx >= 0 && singleAns !== null) { questions[idx].answer = singleAns; applied++; }
       continue;
     }
 
-    // 2) File/list/range based
     const filespec = (r.file || r.filename || '').trim();
     if (!filespec) continue;
 
@@ -238,10 +256,9 @@ try {
       console.warn('answers_min.csv: answers count does not match range length for', filespec);
     }
   }
-
   console.log(`answers_min.csv: applied ${applied} overrides`);
 } catch { /* optional */ }
 
-/* ------------ write output ------------ */
+/* ---------------------------- write out ----------------------------- */
 await fs.writeFile(OUT, JSON.stringify(questions, null, 2));
 console.log(`Wrote ${questions.length} questions to ${OUT}`);
