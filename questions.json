@@ -12,19 +12,6 @@
     "answer": 1
   },
   {
-  "id": "speedmeet-q2",
-  "section": "Type 1",
-  "text": "<p><b>Q.</b> On a 2200 m long circular track, Sarita and Kavita drove their cycles from the same point but in opposite directions with speeds 20 km/h and 16 km/h, respectively. After how much time will they meet again for the first time?</p>",
-  "options": [
-    "3 minutes 40 seconds",
-    "3 minutes 20 seconds",
-    "2 minutes 50 seconds",
-    "2 minutes 20 seconds"
-  ],
-  "answer": 0,
-  "solution_html": "<p>Relative speed (opposite directions) = 20 + 16 = 36 km/h = 10 m/s.<br>Time to first meet = track length / relative speed = 2200 / 10 = 220 s = <b>3 min 40 s</b>.</p>"
-},
-  {
     "id": "type2-img_2284",
     "section": "Type 1",
     "text": "<img src=\"./images/Type 1/IMG_2284.jpeg\" style=\"max-width:100%;height:auto;\">",
