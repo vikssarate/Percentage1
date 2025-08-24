@@ -1,6 +1,6 @@
 // sw.js — shell precache + runtime cache for ALL images
 
-// NOTE: CI stamps this to the latest commit SHA so you don't bump manually.
+// NOTE: CI stamps this to the latest commit SHA so you don't bump manually. 
 const SHELL_CACHE = 'exam-shell-v6f393fc';
 const IMG_CACHE   = 'exam-img-v1';
 
