@@ -24,6 +24,78 @@
     "answer": 1
   },
   {
+    "id": "type2-vu1",
+    "section": "Type 1",
+    "text": "<img src=\"./images/Type 1/vu1.png\" style=\"max-width:100%;height:auto;\">",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "answer": 1
+  },
+  {
+    "id": "type2-vu2",
+    "section": "Type 1",
+    "text": "<img src=\"./images/Type 1/vu2.png\" style=\"max-width:100%;height:auto;\">",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "answer": 1
+  },
+  {
+    "id": "type2-vu3",
+    "section": "Type 1",
+    "text": "<img src=\"./images/Type 1/vu3.png\" style=\"max-width:100%;height:auto;\">",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "answer": 1
+  },
+  {
+    "id": "type2-vu4",
+    "section": "Type 1",
+    "text": "<img src=\"./images/Type 1/vu4.png\" style=\"max-width:100%;height:auto;\">",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "answer": 1
+  },
+  {
+    "id": "type2-vu5",
+    "section": "Type 1",
+    "text": "<img src=\"./images/Type 1/vu5.png\" style=\"max-width:100%;height:auto;\">",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "answer": 1
+  },
+  {
+    "id": "type2-vu6",
+    "section": "Type 1",
+    "text": "<img src=\"./images/Type 1/vu6.png\" style=\"max-width:100%;height:auto;\">",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "answer": 1
+  },
+  {
     "id": "type2-vu20",
     "section": "Type 2",
     "text": "<img src=\"./images/Type 1/vu20.jpg\" style=\"max-width:100%;height:auto;\">",
