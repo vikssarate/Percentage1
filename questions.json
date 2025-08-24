@@ -34,5 +34,17 @@
       "d"
     ],
     "answer": 2
+  },
+  {
+    "id": "type2-vu19",
+    "section": "Type 2",
+    "text": "<img src=\"./images/Type 2/vu19.jpg\" style=\"max-width:100%;height:auto;\">",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "answer": 1
   }
 ]
