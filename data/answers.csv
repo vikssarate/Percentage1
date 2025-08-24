@@ -1,4 +1,4 @@
 file,id,section,text,answer,solution_images,video_link
-images/Type1/q1.jpg,type1-q1,Type 1,What is 2 + 2?,1,images/solutions/q1-sol.png,https://youtu.be/exampleQ1
+,,Type 1,What is 2 + 2?,1,,
 images/Type2/vu20.jpg,type2-vu20,Type 2,<img src='./images/Type2/vu20.jpg' style='max-width:100%;height:auto;'>,2,images/solutions/vu20-sol.webp;images/solutions/vu20-sol-2.png,https://your-cdn.example.com/sol-vu20.mp4
 images/Type2/IMG_2796.jpeg,type2-img_2796,Type 2,<img src='./images/Type2/IMG_2796.jpeg' style='max-width:100%;height:auto;'>,0,,https://drive.google.com/file/d/FILE_ID/view
