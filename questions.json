@@ -159,18 +159,6 @@
     "answer": 1
   },
   {
-    "id": "type2-vu9",
-    "section": "vu9.jpg",
-    "text": "<img src=\"./images/vu9.jpg\" style=\"max-width:100%;height:auto;\">",
-    "options": [
-      "a",
-      "b",
-      "c",
-      "d"
-    ],
-    "answer": 1
-  },
-  {
     "id": "type2-vu11",
     "section": "vu11.jpg",
     "text": "<img src=\"./images/vu11.jpg\" style=\"max-width:100%;height:auto;\">",
