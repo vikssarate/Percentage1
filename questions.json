@@ -33,7 +33,10 @@
       "c",
       "d"
     ],
-    "answer": 2
+    "answer": 2,
+    "solution_images": [
+      "./images/solutions/vu20-sol.jpg"
+    ]
   },
   {
     "id": "type2-vu19",
