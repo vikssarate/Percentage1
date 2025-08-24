@@ -317,6 +317,22 @@ function tickTimer(){
 function currentQuestion(){ return state.activeTest.questions[state.idx]; }
 
 /* ========= Renderers ========= */
+
+/* --- NEW: YouTube helper for embeds --- */
+function ytEmbed(url){
+  try {
+    const u = new URL(url);
+    if (u.hostname.includes('youtu.be')) {
+      return `https://www.youtube.com/embed/${u.pathname.slice(1)}?rel=0`;
+    }
+    if (u.hostname.includes('youtube.com')) {
+      const id = u.searchParams.get('v');
+      if (id) return `https://www.youtube.com/embed/${id}?rel=0`;
+    }
+  } catch {}
+  return null;
+}
+
 function renderQuestion(){
   const q=currentQuestion();
 
@@ -405,6 +421,38 @@ function renderSolution(q){
 
     content.appendChild(wrap);
   }
+
+  /* --- NEW: render video solutions (YouTube or direct MP4) --- */
+  const vids = Array.isArray(q.solution_videos)
+    ? q.solution_videos
+    : (q.solution_video ? [q.solution_video] : []);
+  if (vids.length){
+    const vwrap = document.createElement('div');
+    vwrap.style.marginTop = '10px';
+    vids.forEach(url => {
+      const embed = ytEmbed(url);
+      if (embed){
+        const ifr = document.createElement('iframe');
+        ifr.width = '100%';
+        ifr.height = '360';
+        ifr.src = embed;
+        ifr.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+        ifr.allowFullscreen = true;
+        ifr.style.border = '0';
+        vwrap.appendChild(ifr);
+      } else {
+        const video = document.createElement('video');
+        video.controls = true;
+        video.style.width = '100%';
+        const src = document.createElement('source');
+        src.src = url; // e.g., your CDN/Drive public MP4 URL
+        video.appendChild(src);
+        vwrap.appendChild(video);
+      }
+    });
+    content.appendChild(vwrap);
+  }
+  /* --- end video block --- */
 
   if (state.submitted) {
     panel.classList.remove('d-none');
