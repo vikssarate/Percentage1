@@ -123,42 +123,6 @@
     "answer": 1
   },
   {
-    "id": "type2-vu6",
-    "section": "vu6.jpg",
-    "text": "<img src=\"./images/vu6.jpg\" style=\"max-width:100%;height:auto;\">",
-    "options": [
-      "a",
-      "b",
-      "c",
-      "d"
-    ],
-    "answer": 1
-  },
-  {
-    "id": "type2-vu7",
-    "section": "vu7.jpg",
-    "text": "<img src=\"./images/vu7.jpg\" style=\"max-width:100%;height:auto;\">",
-    "options": [
-      "a",
-      "b",
-      "c",
-      "d"
-    ],
-    "answer": 1
-  },
-  {
-    "id": "type2-vu8",
-    "section": "vu8.jpg",
-    "text": "<img src=\"./images/vu8.jpg\" style=\"max-width:100%;height:auto;\">",
-    "options": [
-      "a",
-      "b",
-      "c",
-      "d"
-    ],
-    "answer": 1
-  },
-  {
     "id": "type2-vu11",
     "section": "vu11.jpg",
     "text": "<img src=\"./images/vu11.jpg\" style=\"max-width:100%;height:auto;\">",
