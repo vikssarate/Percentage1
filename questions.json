@@ -115,7 +115,7 @@
   },
   {
     "id": "type2-vu20",
-    "section": "Type 2",
+    "section": "Type 1",
     "text": "<img src=\"./images/Type 1/vu20.jpg\" style=\"max-width:100%;height:auto;\">",
     "options": [
       "a",
@@ -123,12 +123,9 @@
       "c",
       "d"
     ],
-    "answer": 2,
+    "answer": 1,
     "solution_images": [
       "./images/solutions/vu20-sol.jpg"
-    ],
-    "solution_videos": [
-      "https://youtu.be/CGxgNsEQAu8?si=PngPFCX0YK9iS3Tw"
     ]
   },
   {
