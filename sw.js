@@ -1,7 +1,7 @@
 // sw.js — shell precache + runtime cache for ALL images
 
 // CI stamps these; no manual bumps.
-const SHELL_CACHE = 'exam-shell-v{{SHA}}';
+const SHELL_CACHE = 'exam-shell-v37be9e4';
 const IMG_CACHE   = 'exam-img-v{{SHA}}';
 
 self.addEventListener('install', (e) => {
