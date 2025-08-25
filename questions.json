@@ -207,6 +207,18 @@
     ]
   },
   {
+    "id": "type2-vu28",
+    "section": "Type 1",
+    "text": "<img src=\"./images/Type 1/vu28.jpeg\" style=\"max-width:100%;height:auto;\">",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "answer": 1
+  },
+  {
     "id": "type2-vu19",
     "section": "Type 2",
     "text": "<img src=\"./images/Type 2/vu19.jpg\" style=\"max-width:100%;height:auto;\">",
