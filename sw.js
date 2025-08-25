@@ -1,7 +1,7 @@
 // sw.js — shell precache + runtime cache for ALL images
 
 // NOTE: CI stamps this to the latest commit SHA so you don't bump manually.
-const SHELL_CACHE = 'exam-shell-v8a540e0';
+const SHELL_CACHE = 'exam-shell-v{{SHA}}';
 const IMG_CACHE   = 'exam-img-v{{SHA}}';
 
 // Pre-cache the tiny app shell (NOT questions.json)
