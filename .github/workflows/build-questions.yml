@@ -28,6 +28,7 @@ jobs:
         with:
           node-version: '20'
 
+      # Build questions.json (also performs auto-rename/pairing inside your script)
       - name: Build questions.json
         run: node tools/build-questions.mjs
 
@@ -38,20 +39,26 @@ jobs:
           set -e
           SHA=${GITHUB_SHA::7}
 
-          # Replace placeholder in sw.js (you have exam-shell-v{{SHA}})
           if [ -f sw.js ]; then
-            sed -i "s/exam-shell-v{{SHA}}/exam-shell-v${SHA}/g" sw.js
+            # Replace placeholders first (preferred pattern)
+            sed -i "s/exam-shell-v{{SHA}}/exam-shell-v${SHA}/g" sw.js || true
+            sed -i "s/exam-img-v{{SHA}}/exam-img-v${SHA}/g" sw.js || true
+
+            # Fallback: if placeholders aren't present, bump any existing versions
+            sed -i -E "s/exam-shell-v[0-9A-Za-z._-]+/exam-shell-v${SHA}/g" sw.js || true
+            sed -i -E "s/exam-img-v[0-9A-Za-z._-]+/exam-img-v${SHA}/g" sw.js || true
           fi
 
-          # Replace any ?v= token on questions.json in index.html (you load questions.json?v=dev)
           if [ -f index.html ]; then
-            sed -i "s#questions.json?v=[A-Za-z0-9._-]*#questions.json?v=${SHA}#g" index.html
+            # Force the browser to fetch fresh questions.json
+            sed -i "s#questions.json?v=[A-Za-z0-9._-]*#questions.json?v=${SHA}#g" index.html || true
           fi
 
       - name: Commit updates
         run: |
           git config user.name  "github-actions"
           git config user.email "actions@github.com"
-          git add questions.json index.html sw.js
+          # Include questions.json, index.html, sw.js, and ANY renamed images/solutions
+          git add -A
           git commit -m "Auto: rebuild questions + cache-bust ${GITHUB_SHA::7}" || echo "No changes"
           git push
