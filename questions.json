@@ -78,7 +78,7 @@
       "c",
       "d"
     ],
-    "answer": 1,
+    "answer": 0,
     "solution_images": [
       "./images/solutions/vu4-sol.png"
     ]
@@ -108,7 +108,7 @@
       "c",
       "d"
     ],
-    "answer": 1,
+    "answer": 0,
     "solution_images": [
       "./images/solutions/vu6-sol.png"
     ]
@@ -123,7 +123,7 @@
       "c",
       "d"
     ],
-    "answer": 1,
+    "answer": 0,
     "solution_images": [
       "./images/solutions/vu20-sol.jpg"
     ]
@@ -138,6 +138,6 @@
       "c",
       "d"
     ],
-    "answer": 1
+    "answer": 0
   }
 ]
