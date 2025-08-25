@@ -204,7 +204,7 @@ const state = {
 /* ========= Load questions ========= */
 async function loadQuestions() {
   // Use a token your CI will overwrite (matches sed pattern)
-  const res = await fetch('questions.json?v=626597b');
+  const res = await fetch('questions.json?v=c7f4ebb');
   const data = await res.json();
   state.tests = Array.isArray(data)
     ? [{ id:'demo', title:'Percentage', durationMinutes:120, negative:0.33, questions:data }]

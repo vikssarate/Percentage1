@@ -160,21 +160,24 @@
     ]
   },
   {
-    "id": "type2-vu23.jpg",
+    "id": "type2-vu23",
     "section": "Type 1",
-    "text": "<img src=\"./images/Type 1/vu23.jpg.png\" style=\"max-width:100%;height:auto;\">",
+    "text": "<img src=\"./images/Type 1/vu23.jpg\" style=\"max-width:100%;height:auto;\">",
     "options": [
       "a",
       "b",
       "c",
       "d"
     ],
-    "answer": 1
+    "answer": 1,
+    "solution_images": [
+      "./images/solutions/vu23-sol.png"
+    ]
   },
   {
-    "id": "type2-vu24.jpg",
+    "id": "type2-vu24",
     "section": "Type 1",
-    "text": "<img src=\"./images/Type 1/vu24.jpg.png\" style=\"max-width:100%;height:auto;\">",
+    "text": "<img src=\"./images/Type 1/vu24.jpg\" style=\"max-width:100%;height:auto;\">",
     "options": [
       "a",
       "b",
