@@ -129,16 +129,20 @@
     ]
   },
   {
-    "id": "type2-vu21.jpg",
+    "id": "type2-vu21",
     "section": "Type 1",
-    "text": "<img src=\"./images/Type 1/vu21.jpg.png\" style=\"max-width:100%;height:auto;\">",
+    "text": "<img src=\"./images/Type 1/vu21.jpg\" style=\"max-width:100%;height:auto;\">",
     "options": [
       "a",
       "b",
       "c",
       "d"
     ],
-    "answer": 1
+    "answer": 1,
+    "solution_images": [
+      "./images/solutions/vu21-sol.jpg.png",
+      "./images/solutions/vu21-sol.png"
+    ]
   },
   {
     "id": "type2-vu22.jpg",
