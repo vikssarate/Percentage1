@@ -1,12 +1,12 @@
 // sw.js — shell precache + runtime cache for ALL images
-
-// CI stamps these; no manual bumps.
-const SHELL_CACHE = 'exam-shell-v37be9e4';
+const SHELL_CACHE = 'exam-shell-v{{SHA}}';
 const IMG_CACHE   = 'exam-img-v{{SHA}}';
 
 self.addEventListener('install', (e) => {
   e.waitUntil(
-    caches.open(SHELL_CACHE).then(c => c.addAll(['./','./index.html']))
+    caches.open(SHELL_CACHE).then((c) =>
+      c.addAll(['./','./index.html'])
+    )
   );
   self.skipWaiting();
 });
@@ -20,7 +20,6 @@ self.addEventListener('activate', (e) => {
   })());
 });
 
-// Prevent unbounded growth (simple FIFO by entry count)
 async function trimCache(cacheName, maxEntries = 1500) {
   const cache = await caches.open(cacheName);
   const keys  = await cache.keys();
@@ -32,35 +31,20 @@ async function trimCache(cacheName, maxEntries = 1500) {
 
 self.addEventListener('fetch', (e) => {
   const req = e.request;
-
-  // Only handle images
   if (req.destination === 'image') {
-    // Optional: cache same-origin only (safer)
-    const sameOrigin = new URL(req.url).origin === self.location.origin;
-
-    if (!sameOrigin) return; // let the network handle third-party images
-
     e.respondWith((async () => {
       const cache = await caches.open(IMG_CACHE);
       const hit   = await cache.match(req);
       if (hit) return hit;
-
       try {
         const res = await fetch(req, { cache: 'no-store' });
-
-        // Cache only clean image responses
-        const ok    = res && res.status === 200 && (res.type === 'basic' || res.type === 'cors');
-        const ctype = res.headers.get('content-type') || '';
-        const isImg = ctype.startsWith('image/');
-
-        if (ok && isImg) {
+        if (res && res.ok && (res.type === 'basic' || res.type === 'cors')) {
           cache.put(req, res.clone());
           trimCache(IMG_CACHE, 1500);
         }
         return res;
       } catch {
-        // (Optional) return a tiny placeholder image here instead of text
-        return new Response('Image fetch failed', { status: 504, statusText: 'Gateway Timeout' });
+        return new Response('Image fetch failed', { status: 504 });
       }
     })());
   }
