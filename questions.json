@@ -1,29 +1,5 @@
 [
   {
-    "id": "type2-img_0779",
-    "section": "Type 1",
-    "text": "<img src=\"./images/Type 1/IMG_0779.jpeg\" style=\"max-width:100%;height:auto;\">",
-    "options": [
-      "a",
-      "b",
-      "c",
-      "d"
-    ],
-    "answer": 1
-  },
-  {
-    "id": "type2-img_2284",
-    "section": "Type 1",
-    "text": "<img src=\"./images/Type 1/IMG_2284.jpeg\" style=\"max-width:100%;height:auto;\">",
-    "options": [
-      "a",
-      "b",
-      "c",
-      "d"
-    ],
-    "answer": 1
-  },
-  {
     "id": "type2-vu1",
     "section": "Type 1",
     "text": "<img src=\"./images/Type 1/vu1.png\" style=\"max-width:100%;height:auto;\">",
@@ -187,6 +163,33 @@
     "solution_images": [
       "./images/solutions/vu24-sol.png"
     ]
+  },
+  {
+    "id": "type2-vu25",
+    "section": "Type 1",
+    "text": "<img src=\"./images/Type 1/vu25.jpeg\" style=\"max-width:100%;height:auto;\">",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "answer": 1,
+    "solution_images": [
+      "./images/solutions/vu25-sol.png"
+    ]
+  },
+  {
+    "id": "type2-vu26",
+    "section": "Type 1",
+    "text": "<img src=\"./images/Type 1/vu26.jpeg\" style=\"max-width:100%;height:auto;\">",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "answer": 1
   },
   {
     "id": "type2-vu19",
