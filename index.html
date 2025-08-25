@@ -207,7 +207,7 @@ async function loadQuestions() {
   const res = await fetch('questions.json?v=8a540e0');
   const data = await res.json();
   state.tests = Array.isArray(data)
-    ? [{ id:'demo', title:'Demo Test', durationMinutes:30, negative:0.25, questions:data }]
+    ? [{ id:'demo', title:'Percentage', durationMinutes:120, negative:0.33, questions:data }]
     : data.tests;
   renderTestList();
 }
