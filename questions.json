@@ -9,7 +9,10 @@
       "c",
       "d"
     ],
-    "answer": 1
+    "answer": 1,
+    "solution_images": [
+      "./images/solutions/vu20-sol.jpeg"
+    ]
   },
   {
     "id": "type2-vu21",
@@ -21,7 +24,10 @@
       "c",
       "d"
     ],
-    "answer": 1
+    "answer": 1,
+    "solution_images": [
+      "./images/solutions/vu21-sol.jpeg"
+    ]
   },
   {
     "id": "type2-vu22",
@@ -33,7 +39,10 @@
       "c",
       "d"
     ],
-    "answer": 1
+    "answer": 1,
+    "solution_images": [
+      "./images/solutions/vu22-sol.jpeg"
+    ]
   },
   {
     "id": "type2-vu23",
@@ -57,6 +66,9 @@
       "c",
       "d"
     ],
-    "answer": 0
+    "answer": 0,
+    "solution_images": [
+      "./images/solutions/vu19-sol.jpeg"
+    ]
   }
 ]
