@@ -311,10 +311,7 @@
       "c",
       "d"
     ],
-    "answer": 1,
-    "solution_images": [
-      "./images/solutions/vu34-sol.jpeg"
-    ]
+    "answer": 1
   },
   {
     "id": "type2-vu35",
@@ -326,10 +323,7 @@
       "c",
       "d"
     ],
-    "answer": 1,
-    "solution_images": [
-      "./images/solutions/vu35-sol.jpeg"
-    ]
+    "answer": 1
   },
   {
     "id": "type2-vu36",
@@ -341,10 +335,7 @@
       "c",
       "d"
     ],
-    "answer": 1,
-    "solution_images": [
-      "./images/solutions/vu36-sol.jpeg"
-    ]
+    "answer": 1
   },
   {
     "id": "type2-vu37",
