@@ -120,42 +120,6 @@
     ]
   },
   {
-    "id": "type2-vu9",
-    "section": "Type 1",
-    "text": "<img src=\"./images/Type 1/vu9.png\" style=\"max-width:100%;height:auto;\">",
-    "options": [
-      "a",
-      "b",
-      "c",
-      "d"
-    ],
-    "answer": 1
-  },
-  {
-    "id": "type2-vu10",
-    "section": "Type 1",
-    "text": "<img src=\"./images/Type 1/vu10.png\" style=\"max-width:100%;height:auto;\">",
-    "options": [
-      "a",
-      "b",
-      "c",
-      "d"
-    ],
-    "answer": 1
-  },
-  {
-    "id": "type2-vu11",
-    "section": "Type 1",
-    "text": "<img src=\"./images/Type 1/vu11.png\" style=\"max-width:100%;height:auto;\">",
-    "options": [
-      "a",
-      "b",
-      "c",
-      "d"
-    ],
-    "answer": 1
-  },
-  {
     "id": "type2-vu12",
     "section": "Type 1",
     "text": "<img src=\"./images/Type 1/vu12.png\" style=\"max-width:100%;height:auto;\">",
