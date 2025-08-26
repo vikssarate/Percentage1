@@ -69,7 +69,10 @@
       "c",
       "d"
     ],
-    "answer": 1
+    "answer": 1,
+    "solution_images": [
+      "./images/solutions/vu5-sol.jpeg"
+    ]
   },
   {
     "id": "type2-vu6",
@@ -81,7 +84,10 @@
       "c",
       "d"
     ],
-    "answer": 0
+    "answer": 0,
+    "solution_images": [
+      "./images/solutions/vu6-sol.jpeg"
+    ]
   },
   {
     "id": "type2-vu7",
@@ -93,6 +99,9 @@
       "c",
       "d"
     ],
-    "answer": 1
+    "answer": 1,
+    "solution_images": [
+      "./images/solutions/vu7-sol.jpeg"
+    ]
   }
 ]
