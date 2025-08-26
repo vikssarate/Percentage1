@@ -9,10 +9,7 @@
       "c",
       "d"
     ],
-    "answer": 1,
-    "solution_images": [
-      "./images/solutions/vu20-sol.jpeg"
-    ]
+    "answer": 1
   },
   {
     "id": "type2-vu21",
@@ -24,10 +21,7 @@
       "c",
       "d"
     ],
-    "answer": 1,
-    "solution_images": [
-      "./images/solutions/vu21-sol.jpeg"
-    ]
+    "answer": 1
   },
   {
     "id": "type2-vu22",
@@ -39,10 +33,7 @@
       "c",
       "d"
     ],
-    "answer": 1,
-    "solution_images": [
-      "./images/solutions/vu22-sol.jpeg"
-    ]
+    "answer": 1
   },
   {
     "id": "type2-vu23",
