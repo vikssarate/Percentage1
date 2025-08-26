@@ -123,18 +123,17 @@ async function autoRenameAndPairImages() {
   // 2) Rename orphan solution images (no "-sol" in their basename yet)
   const orphans = Sols.filter(p => !/-sol(\.|-)/i.test(path.basename(p)));
 
-  // Assign each orphan to the **latest question without a solution**;
-  // if all have ≥1 solution, attach to the latest question with -sol-N
+  // Assign each orphan to the **earliest** question without a solution
+  // CHANGED: scan from start (ascending) instead of from end
   for (const sp of orphans.sort((a,b)=>a.localeCompare(b, undefined, { numeric:true }))) {
     if (!qBases.length) break;
 
-    // find from the end (highest vuNN) the first with 0 solutions
     let target = null;
-    for (let i = qBases.length - 1; i >= 0; i--) {
+    for (let i = 0; i < qBases.length; i++) {           // <-- changed direction
       const base = qBases[i];
       if ((solCount[base] || 0) === 0) { target = base; break; }
     }
-    if (!target) target = qBases[qBases.length - 1]; // everyone has ≥1; use the latest
+    if (!target) target = qBases[qBases.length - 1];     // if all already have ≥1, attach to latest
 
     const count  = solCount[target] || 0;
     const suffix = count === 0 ? '-sol' : `-sol-${count + 1}`;
