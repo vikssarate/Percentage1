@@ -101,43 +101,47 @@ async function autoRenameAndPairImages() {
 
   // Refresh after question renames
   const after = await walk(IMG_DIR);
-  const Qs = after.filter(isQuestion);
-  const Sols = after.filter(p => isImg(p) && isSolution(p));
-
-  // Map qBase -> existing solution paths
-  const hasSols = new Map();
-  for (const sp of Sols) {
-    const bb = baseNoExt(sp);
-    const m = bb.match(/^(vu\d+)(-sol(?:-\d+)?)$/i);
-    if (m) {
-      const key = m[1];
-      if (!hasSols.has(key)) hasSols.set(key, []);
-      hasSols.get(key).push(sp);
-    }
-  }
+  const Qs    = after.filter(isQuestion);
+  const Sols  = after.filter(p => isImg(p) && isSolution(p));
 
   // All normalized question bases, sorted by number
   const qBases = Qs.map(p => baseNoExt(p))
                    .filter(b => /^vu\d+$/i.test(b))
                    .sort((a,b) => +a.slice(2) - +b.slice(2));
 
+  // Count existing solutions per question
+  const solCount = Object.create(null);
+  for (const sp of Sols) {
+    const bb = baseNoExt(sp);
+    const m  = bb.match(/^(vu\d+)(?:-sol(?:-\d+)?)$/i);
+    if (m) {
+      const key = m[1];
+      solCount[key] = (solCount[key] || 0) + 1;
+    }
+  }
+
   // 2) Rename orphan solution images (no "-sol" in their basename yet)
   const orphans = Sols.filter(p => !/-sol(\.|-)/i.test(path.basename(p)));
 
-  // Track how many solutions each qBase has (existing + new assignments)
-  const counts = new Map();
-  for (const b of qBases) counts.set(b, (hasSols.get(b) || []).length);
-  let idx = 0;
-
+  // Assign each orphan to the **latest question without a solution**;
+  // if all have ≥1 solution, attach to the latest question with -sol-N
   for (const sp of orphans.sort((a,b)=>a.localeCompare(b, undefined, { numeric:true }))) {
     if (!qBases.length) break;
-    const qBase = qBases[idx % qBases.length];
-    const cur = counts.get(qBase) || 0;
-    const suffix = cur === 0 ? '-sol' : `-sol-${cur+1}`;
-    const dest = toUnix(path.join(path.dirname(sp), `${qBase}${suffix}${path.extname(sp).toLowerCase()}`));
+
+    // find from the end (highest vuNN) the first with 0 solutions
+    let target = null;
+    for (let i = qBases.length - 1; i >= 0; i--) {
+      const base = qBases[i];
+      if ((solCount[base] || 0) === 0) { target = base; break; }
+    }
+    if (!target) target = qBases[qBases.length - 1]; // everyone has ≥1; use the latest
+
+    const count  = solCount[target] || 0;
+    const suffix = count === 0 ? '-sol' : `-sol-${count + 1}`;
+    const dest   = toUnix(path.join(path.dirname(sp), `${target}${suffix}${path.extname(sp).toLowerCase()}`));
+
     await fs.rename(sp, dest);
-    counts.set(qBase, cur + 1);
-    idx++;
+    solCount[target] = count + 1;
   }
 }
 
