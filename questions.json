@@ -218,7 +218,10 @@
       "c",
       "d"
     ],
-    "answer": 1
+    "answer": 1,
+    "solution_images": [
+      "./images/solutions/vu28-sol.jpeg"
+    ]
   },
   {
     "id": "type2-vu19",
