@@ -1,37 +1,5 @@
 [
   {
-    "id": "type2-vu1",
-    "section": "Type 1",
-    "text": "<img src=\"./images/Type 1/vu1.png\" style=\"max-width:100%;height:auto;\">",
-    "options": [
-      "a",
-      "b",
-      "c",
-      "d"
-    ],
-    "answer": 1,
-    "solution_images": [
-      "./images/solutions/vu1-sol-2.png",
-      "./images/solutions/vu1-sol-3.png",
-      "./images/solutions/vu1-sol.png"
-    ]
-  },
-  {
-    "id": "type2-vu2",
-    "section": "Type 1",
-    "text": "<img src=\"./images/Type 1/vu2.png\" style=\"max-width:100%;height:auto;\">",
-    "options": [
-      "a",
-      "b",
-      "c",
-      "d"
-    ],
-    "answer": 1,
-    "solution_images": [
-      "./images/solutions/vu2-sol.png"
-    ]
-  },
-  {
     "id": "type2-vu3",
     "section": "Type 1",
     "text": "<img src=\"./images/Type 1/vu3.png\" style=\"max-width:100%;height:auto;\">",
