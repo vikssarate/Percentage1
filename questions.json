@@ -239,6 +239,54 @@
     ]
   },
   {
+    "id": "type2-vu30",
+    "section": "Type 1",
+    "text": "<img src=\"./images/Type 1/vu30.jpeg\" style=\"max-width:100%;height:auto;\">",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "answer": 1
+  },
+  {
+    "id": "type2-vu31",
+    "section": "Type 1",
+    "text": "<img src=\"./images/Type 1/vu31.jpeg\" style=\"max-width:100%;height:auto;\">",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "answer": 1
+  },
+  {
+    "id": "type2-vu32",
+    "section": "Type 1",
+    "text": "<img src=\"./images/Type 1/vu32.jpeg\" style=\"max-width:100%;height:auto;\">",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "answer": 1
+  },
+  {
+    "id": "type2-vu33",
+    "section": "Type 1",
+    "text": "<img src=\"./images/Type 1/vu33.jpeg\" style=\"max-width:100%;height:auto;\">",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "answer": 1
+  },
+  {
     "id": "type2-vu19",
     "section": "Type 2",
     "text": "<img src=\"./images/Type 2/vu19.jpg\" style=\"max-width:100%;height:auto;\">",
