@@ -9,7 +9,10 @@
       "c",
       "d"
     ],
-    "answer": 1
+    "answer": 1,
+    "solution_images": [
+      "./images/solutions/vu1-sol.png"
+    ]
   },
   {
     "id": "type2-vu2",
@@ -21,7 +24,10 @@
       "c",
       "d"
     ],
-    "answer": 1
+    "answer": 1,
+    "solution_images": [
+      "./images/solutions/vu2-sol.png"
+    ]
   },
   {
     "id": "type2-vu3",
@@ -33,7 +39,10 @@
       "c",
       "d"
     ],
-    "answer": 1
+    "answer": 1,
+    "solution_images": [
+      "./images/solutions/vu3-sol.png"
+    ]
   },
   {
     "id": "type2-vu4",
@@ -45,7 +54,10 @@
       "c",
       "d"
     ],
-    "answer": 0
+    "answer": 0,
+    "solution_images": [
+      "./images/solutions/vu4-sol.png"
+    ]
   },
   {
     "id": "type2-vu5",
@@ -57,7 +69,10 @@
       "c",
       "d"
     ],
-    "answer": 1
+    "answer": 1,
+    "solution_images": [
+      "./images/solutions/vu5-sol.png"
+    ]
   },
   {
     "id": "type2-vu6",
@@ -69,7 +84,10 @@
       "c",
       "d"
     ],
-    "answer": 0
+    "answer": 0,
+    "solution_images": [
+      "./images/solutions/vu6-sol.png"
+    ]
   },
   {
     "id": "type2-vu7",
@@ -81,7 +99,10 @@
       "c",
       "d"
     ],
-    "answer": 1
+    "answer": 1,
+    "solution_images": [
+      "./images/solutions/vu7-sol.png"
+    ]
   },
   {
     "id": "type2-vu8",
@@ -93,7 +114,10 @@
       "c",
       "d"
     ],
-    "answer": 1
+    "answer": 1,
+    "solution_images": [
+      "./images/solutions/vu8-sol.png"
+    ]
   },
   {
     "id": "type2-vu9",
@@ -105,7 +129,10 @@
       "c",
       "d"
     ],
-    "answer": 1
+    "answer": 1,
+    "solution_images": [
+      "./images/solutions/vu9-sol.png"
+    ]
   },
   {
     "id": "type2-vu10",
@@ -117,7 +144,10 @@
       "c",
       "d"
     ],
-    "answer": 1
+    "answer": 1,
+    "solution_images": [
+      "./images/solutions/vu10-sol.png"
+    ]
   },
   {
     "id": "type2-vu11",
@@ -129,7 +159,10 @@
       "c",
       "d"
     ],
-    "answer": 1
+    "answer": 1,
+    "solution_images": [
+      "./images/solutions/vu11-sol.png"
+    ]
   },
   {
     "id": "type2-vu12",
@@ -141,7 +174,10 @@
       "c",
       "d"
     ],
-    "answer": 1
+    "answer": 1,
+    "solution_images": [
+      "./images/solutions/vu12-sol.png"
+    ]
   },
   {
     "id": "type2-vu13",
@@ -153,7 +189,10 @@
       "c",
       "d"
     ],
-    "answer": 0
+    "answer": 0,
+    "solution_images": [
+      "./images/solutions/vu13-sol.png"
+    ]
   },
   {
     "id": "type2-vu14",
@@ -165,7 +204,10 @@
       "c",
       "d"
     ],
-    "answer": 0
+    "answer": 0,
+    "solution_images": [
+      "./images/solutions/vu14-sol.png"
+    ]
   },
   {
     "id": "type2-vu15",
@@ -177,7 +219,10 @@
       "c",
       "d"
     ],
-    "answer": 0
+    "answer": 0,
+    "solution_images": [
+      "./images/solutions/vu15-sol.png"
+    ]
   },
   {
     "id": "type2-vu16",
@@ -189,7 +234,10 @@
       "c",
       "d"
     ],
-    "answer": 0
+    "answer": 0,
+    "solution_images": [
+      "./images/solutions/vu16-sol.png"
+    ]
   },
   {
     "id": "type2-vu17",
@@ -201,7 +249,10 @@
       "c",
       "d"
     ],
-    "answer": 0
+    "answer": 0,
+    "solution_images": [
+      "./images/solutions/vu17-sol.png"
+    ]
   },
   {
     "id": "type2-vu18",
@@ -213,7 +264,10 @@
       "c",
       "d"
     ],
-    "answer": 0
+    "answer": 0,
+    "solution_images": [
+      "./images/solutions/vu18-sol.png"
+    ]
   },
   {
     "id": "type2-vu19",
@@ -225,6 +279,9 @@
       "c",
       "d"
     ],
-    "answer": 0
+    "answer": 0,
+    "solution_images": [
+      "./images/solutions/vu19-sol.png"
+    ]
   }
 ]
