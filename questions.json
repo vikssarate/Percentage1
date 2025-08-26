@@ -1,29 +1,5 @@
 [
   {
-    "id": "type2-vu20",
-    "section": "Type 1",
-    "text": "<img src=\"./images/Type 1/vu20.jpeg\" style=\"max-width:100%;height:auto;\">",
-    "options": [
-      "a",
-      "b",
-      "c",
-      "d"
-    ],
-    "answer": 1
-  },
-  {
-    "id": "type2-vu21",
-    "section": "Type 1",
-    "text": "<img src=\"./images/Type 1/vu21.jpeg\" style=\"max-width:100%;height:auto;\">",
-    "options": [
-      "a",
-      "b",
-      "c",
-      "d"
-    ],
-    "answer": 1
-  },
-  {
     "id": "type2-vu22",
     "section": "Type 1",
     "text": "<img src=\"./images/Type 1/vu22.jpeg\" style=\"max-width:100%;height:auto;\">",
