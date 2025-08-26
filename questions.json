@@ -266,10 +266,7 @@
       "c",
       "d"
     ],
-    "answer": 1,
-    "solution_images": [
-      "./images/solutions/vu31-sol.jpeg"
-    ]
+    "answer": 1
   },
   {
     "id": "type2-vu32",
@@ -281,10 +278,7 @@
       "c",
       "d"
     ],
-    "answer": 1,
-    "solution_images": [
-      "./images/solutions/vu32-sol.jpeg"
-    ]
+    "answer": 1
   },
   {
     "id": "type2-vu33",
