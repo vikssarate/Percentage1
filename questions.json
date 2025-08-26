@@ -118,17 +118,5 @@
     "solution_images": [
       "./images/solutions/vu8-sol.jpeg"
     ]
-  },
-  {
-    "id": "type2-vu12",
-    "section": "Type 1",
-    "text": "<img src=\"./images/Type 1/vu12.png\" style=\"max-width:100%;height:auto;\">",
-    "options": [
-      "a",
-      "b",
-      "c",
-      "d"
-    ],
-    "answer": 1
   }
 ]
