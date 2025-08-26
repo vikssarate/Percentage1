@@ -60,21 +60,6 @@
     ]
   },
   {
-    "id": "type2-vu22",
-    "section": "Type 1",
-    "text": "<img src=\"./images/Type 1/vu22.jpg\" style=\"max-width:100%;height:auto;\">",
-    "options": [
-      "a",
-      "b",
-      "c",
-      "d"
-    ],
-    "answer": 1,
-    "solution_images": [
-      "./images/solutions/vu22-sol.jpg"
-    ]
-  },
-  {
     "id": "type2-vu23",
     "section": "Type 1",
     "text": "<img src=\"./images/Type 1/vu23.jpg\" style=\"max-width:100%;height:auto;\">",
