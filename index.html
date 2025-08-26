@@ -204,7 +204,7 @@ const state = {
 /* ========= Load questions ========= */
 async function loadQuestions() {
   // CI replaces this token with the short SHA to bust cache
-  const res = await fetch('questions.json?v=0215808'); /* placeholder */
+  const res = await fetch('questions.json?v=5ff39d6'); /* placeholder */
   const data = await res.json();
   state.tests = Array.isArray(data)
     ? [{ id:'demo', title:'Percentage', durationMinutes:120, negative:0.33, questions:data }]
