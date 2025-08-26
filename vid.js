@@ -1,23 +1,16 @@
 // sw.js — shell precache + runtime cache for ALL images
 
-// NOTE: CI stamps this to the latest commit SHA so you don't bump manually.
+// CI stamps these; no manual bumps.
 const SHELL_CACHE = 'exam-shell-v{{SHA}}';
 const IMG_CACHE   = 'exam-img-v{{SHA}}';
 
-// Pre-cache the tiny app shell (NOT questions.json)
 self.addEventListener('install', (e) => {
   e.waitUntil(
-    caches.open(SHELL_CACHE).then((c) =>
-      c.addAll([
-        './',          // GitHub Pages root
-        './index.html' // shell only; questions.json is versioned at runtime
-      ])
-    )
+    caches.open(SHELL_CACHE).then(c => c.addAll(['./','./index.html']))
   );
   self.skipWaiting();
 });
 
-// Clean old caches
 self.addEventListener('activate', (e) => {
   e.waitUntil((async () => {
     const keep = new Set([SHELL_CACHE, IMG_CACHE]);
@@ -27,7 +20,7 @@ self.addEventListener('activate', (e) => {
   })());
 });
 
-// Keep the image cache from growing forever
+// Prevent unbounded growth (simple FIFO by entry count)
 async function trimCache(cacheName, maxEntries = 1500) {
   const cache = await caches.open(cacheName);
   const keys  = await cache.keys();
@@ -37,10 +30,16 @@ async function trimCache(cacheName, maxEntries = 1500) {
   }
 }
 
-// Cache-first for images (offline after first view)
 self.addEventListener('fetch', (e) => {
   const req = e.request;
+
+  // Only handle images
   if (req.destination === 'image') {
+    // Optional: cache same-origin only (safer)
+    const sameOrigin = new URL(req.url).origin === self.location.origin;
+
+    if (!sameOrigin) return; // let the network handle third-party images
+
     e.respondWith((async () => {
       const cache = await caches.open(IMG_CACHE);
       const hit   = await cache.match(req);
@@ -48,12 +47,19 @@ self.addEventListener('fetch', (e) => {
 
       try {
         const res = await fetch(req, { cache: 'no-store' });
-        if (res && res.status === 200 && (res.type === 'basic' || res.type === 'cors')) {
+
+        // Cache only clean image responses
+        const ok    = res && res.status === 200 && (res.type === 'basic' || res.type === 'cors');
+        const ctype = res.headers.get('content-type') || '';
+        const isImg = ctype.startsWith('image/');
+
+        if (ok && isImg) {
           cache.put(req, res.clone());
           trimCache(IMG_CACHE, 1500);
         }
         return res;
       } catch {
+        // (Optional) return a tiny placeholder image here instead of text
         return new Response('Image fetch failed', { status: 504, statusText: 'Gateway Timeout' });
       }
     })());

@@ -1,32 +1,8 @@
 [
   {
-    "id": "type2-img_0779",
-    "section": "Type 1",
-    "text": "<img src=\"./images/Type 1/IMG_0779.jpeg\" style=\"max-width:100%;height:auto;\">",
-    "options": [
-      "a",
-      "b",
-      "c",
-      "d"
-    ],
-    "answer": 1
-  },
-  {
-    "id": "type2-img_2284",
-    "section": "Type 1",
-    "text": "<img src=\"./images/Type 1/IMG_2284.jpeg\" style=\"max-width:100%;height:auto;\">",
-    "options": [
-      "a",
-      "b",
-      "c",
-      "d"
-    ],
-    "answer": 1
-  },
-  {
     "id": "type2-vu1",
     "section": "Type 1",
-    "text": "<img src=\"./images/Type 1/vu1.png\" style=\"max-width:100%;height:auto;\">",
+    "text": "<img src=\"./images/Type 1/vu1.jpeg\" style=\"max-width:100%;height:auto;\">",
     "options": [
       "a",
       "b",
@@ -35,13 +11,13 @@
     ],
     "answer": 1,
     "solution_images": [
-      "./images/solutions/vu1-sol.png"
+      "./images/solutions/vu1-sol.jpeg"
     ]
   },
   {
     "id": "type2-vu2",
     "section": "Type 1",
-    "text": "<img src=\"./images/Type 1/vu2.png\" style=\"max-width:100%;height:auto;\">",
+    "text": "<img src=\"./images/Type 1/vu2.jpeg\" style=\"max-width:100%;height:auto;\">",
     "options": [
       "a",
       "b",
@@ -50,13 +26,13 @@
     ],
     "answer": 1,
     "solution_images": [
-      "./images/solutions/vu2-sol.png"
+      "./images/solutions/vu2-sol.jpeg"
     ]
   },
   {
     "id": "type2-vu3",
     "section": "Type 1",
-    "text": "<img src=\"./images/Type 1/vu3.png\" style=\"max-width:100%;height:auto;\">",
+    "text": "<img src=\"./images/Type 1/vu3.jpeg\" style=\"max-width:100%;height:auto;\">",
     "options": [
       "a",
       "b",
@@ -65,13 +41,13 @@
     ],
     "answer": 1,
     "solution_images": [
-      "./images/solutions/vu3-sol.png"
+      "./images/solutions/vu3-sol.jpeg"
     ]
   },
   {
     "id": "type2-vu4",
     "section": "Type 1",
-    "text": "<img src=\"./images/Type 1/vu4.png\" style=\"max-width:100%;height:auto;\">",
+    "text": "<img src=\"./images/Type 1/vu4.jpeg\" style=\"max-width:100%;height:auto;\">",
     "options": [
       "a",
       "b",
@@ -80,13 +56,13 @@
     ],
     "answer": 0,
     "solution_images": [
-      "./images/solutions/vu4-sol.png"
+      "./images/solutions/vu4-sol.jpeg"
     ]
   },
   {
     "id": "type2-vu5",
     "section": "Type 1",
-    "text": "<img src=\"./images/Type 1/vu5.png\" style=\"max-width:100%;height:auto;\">",
+    "text": "<img src=\"./images/Type 1/vu5.jpeg\" style=\"max-width:100%;height:auto;\">",
     "options": [
       "a",
       "b",
@@ -95,13 +71,13 @@
     ],
     "answer": 1,
     "solution_images": [
-      "./images/solutions/vu5-sol.png"
+      "./images/solutions/vu5-sol.jpeg"
     ]
   },
   {
     "id": "type2-vu6",
     "section": "Type 1",
-    "text": "<img src=\"./images/Type 1/vu6.png\" style=\"max-width:100%;height:auto;\">",
+    "text": "<img src=\"./images/Type 1/vu6.jpeg\" style=\"max-width:100%;height:auto;\">",
     "options": [
       "a",
       "b",
@@ -110,13 +86,13 @@
     ],
     "answer": 0,
     "solution_images": [
-      "./images/solutions/vu6-sol.png"
+      "./images/solutions/vu6-sol.jpeg"
     ]
   },
   {
-    "id": "type2-vu20",
+    "id": "type2-vu7",
     "section": "Type 1",
-    "text": "<img src=\"./images/Type 1/vu20.jpg\" style=\"max-width:100%;height:auto;\">",
+    "text": "<img src=\"./images/Type 1/vu7.jpeg\" style=\"max-width:100%;height:auto;\">",
     "options": [
       "a",
       "b",
@@ -125,82 +101,7 @@
     ],
     "answer": 1,
     "solution_images": [
-      "./images/solutions/vu20-sol.jpg"
-    ]
-  },
-  {
-    "id": "type2-vu21",
-    "section": "Type 1",
-    "text": "<img src=\"./images/Type 1/vu21.jpg\" style=\"max-width:100%;height:auto;\">",
-    "options": [
-      "a",
-      "b",
-      "c",
-      "d"
-    ],
-    "answer": 1,
-    "solution_images": [
-      "./images/solutions/vu21-sol.jpg"
-    ]
-  },
-  {
-    "id": "type2-vu22",
-    "section": "Type 1",
-    "text": "<img src=\"./images/Type 1/vu22.jpg\" style=\"max-width:100%;height:auto;\">",
-    "options": [
-      "a",
-      "b",
-      "c",
-      "d"
-    ],
-    "answer": 1,
-    "solution_images": [
-      "./images/solutions/vu22-sol.jpg"
-    ]
-  },
-  {
-    "id": "type2-vu23",
-    "section": "Type 1",
-    "text": "<img src=\"./images/Type 1/vu23.jpg\" style=\"max-width:100%;height:auto;\">",
-    "options": [
-      "a",
-      "b",
-      "c",
-      "d"
-    ],
-    "answer": 1,
-    "solution_images": [
-      "./images/solutions/vu23-sol.png"
-    ]
-  },
-  {
-    "id": "type2-vu24",
-    "section": "Type 1",
-    "text": "<img src=\"./images/Type 1/vu24.jpg\" style=\"max-width:100%;height:auto;\">",
-    "options": [
-      "a",
-      "b",
-      "c",
-      "d"
-    ],
-    "answer": 1,
-    "solution_images": [
-      "./images/solutions/vu24-sol.png"
-    ]
-  },
-  {
-    "id": "type2-vu19",
-    "section": "Type 2",
-    "text": "<img src=\"./images/Type 2/vu19.jpg\" style=\"max-width:100%;height:auto;\">",
-    "options": [
-      "a",
-      "b",
-      "c",
-      "d"
-    ],
-    "answer": 0,
-    "solution_images": [
-      "./images/solutions/vu19-sol.png"
+      "./images/solutions/vu7-sol.jpeg"
     ]
   }
 ]
