@@ -283,5 +283,125 @@
     "solution_images": [
       "./images/solutions/vu19-sol.png"
     ]
+  },
+  {
+    "id": "type2-vu20",
+    "section": "Type 1",
+    "text": "<img src=\"./images/Type 1/vu20.png\" style=\"max-width:100%;height:auto;\">",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "answer": 1,
+    "solution_images": [
+      "./images/solutions/vu20-sol.png"
+    ]
+  },
+  {
+    "id": "type2-vu21",
+    "section": "Type 1",
+    "text": "<img src=\"./images/Type 1/vu21.png\" style=\"max-width:100%;height:auto;\">",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "answer": 1,
+    "solution_images": [
+      "./images/solutions/vu21-sol.png"
+    ]
+  },
+  {
+    "id": "type2-vu22",
+    "section": "Type 1",
+    "text": "<img src=\"./images/Type 1/vu22.png\" style=\"max-width:100%;height:auto;\">",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "answer": 1,
+    "solution_images": [
+      "./images/solutions/vu22-sol.png"
+    ]
+  },
+  {
+    "id": "type2-vu23",
+    "section": "Type 1",
+    "text": "<img src=\"./images/Type 1/vu23.png\" style=\"max-width:100%;height:auto;\">",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "answer": 1,
+    "solution_images": [
+      "./images/solutions/vu23-sol.png"
+    ]
+  },
+  {
+    "id": "type2-vu24",
+    "section": "Type 1",
+    "text": "<img src=\"./images/Type 1/vu24.png\" style=\"max-width:100%;height:auto;\">",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "answer": 1,
+    "solution_images": [
+      "./images/solutions/vu24-sol.png"
+    ]
+  },
+  {
+    "id": "type2-vu25",
+    "section": "Type 1",
+    "text": "<img src=\"./images/Type 1/vu25.png\" style=\"max-width:100%;height:auto;\">",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "answer": 1,
+    "solution_images": [
+      "./images/solutions/vu25-sol.png"
+    ]
+  },
+  {
+    "id": "type2-vu26",
+    "section": "Type 1",
+    "text": "<img src=\"./images/Type 1/vu26.png\" style=\"max-width:100%;height:auto;\">",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "answer": 1,
+    "solution_images": [
+      "./images/solutions/vu26-sol.png"
+    ]
+  },
+  {
+    "id": "type2-vu27",
+    "section": "Type 1",
+    "text": "<img src=\"./images/Type 1/vu27.png\" style=\"max-width:100%;height:auto;\">",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "answer": 1,
+    "solution_images": [
+      "./images/solutions/vu27-sol.png"
+    ]
   }
 ]
