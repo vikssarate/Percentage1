@@ -434,5 +434,17 @@
       "./images/solutions/vu29-sol-2.png",
       "./images/solutions/vu29-sol.png"
     ]
+  },
+  {
+    "id": "type2-vu30",
+    "section": "Type 1",
+    "text": "<img src=\"./images/Type 1/vu30.png\" style=\"max-width:100%;height:auto;\">",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "answer": 1
   }
 ]
