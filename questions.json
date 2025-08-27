@@ -403,5 +403,36 @@
     "solution_images": [
       "./images/solutions/vu27-sol.png"
     ]
+  },
+  {
+    "id": "type2-vu28",
+    "section": "Type 1",
+    "text": "<img src=\"./images/Type 1/vu28.png\" style=\"max-width:100%;height:auto;\">",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "answer": 1,
+    "solution_images": [
+      "./images/solutions/vu28-sol.png"
+    ]
+  },
+  {
+    "id": "type2-vu29",
+    "section": "Type 1",
+    "text": "<img src=\"./images/Type 1/vu29.png\" style=\"max-width:100%;height:auto;\">",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "answer": 1,
+    "solution_images": [
+      "./images/solutions/vu29-sol-2.png",
+      "./images/solutions/vu29-sol.png"
+    ]
   }
 ]
