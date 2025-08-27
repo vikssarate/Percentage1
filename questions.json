@@ -445,6 +445,9 @@
       "c",
       "d"
     ],
-    "answer": 1
+    "answer": 1,
+    "solution_images": [
+      "./images/solutions/vu30-sol.png"
+    ]
   }
 ]

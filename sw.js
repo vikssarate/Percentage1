@@ -1,6 +1,6 @@
 // sw.js — shell precache + runtime cache for ALL images
-const SHELL_CACHE = 'exam-shell-v6b2619f';
-const IMG_CACHE   = 'exam-img-v6b2619f';
+const SHELL_CACHE = 'exam-shell-ve7e861d';
+const IMG_CACHE   = 'exam-img-ve7e861d';
 
 self.addEventListener('install', (e) => {
   e.waitUntil(
