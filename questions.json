@@ -9,7 +9,7 @@
       "c",
       "d"
     ],
-    "answer": 1,
+    "answer": 3,
     "solution_images": [
       "./images/solutions/vu1-sol.png"
     ]
@@ -54,7 +54,7 @@
       "c",
       "d"
     ],
-    "answer": 0,
+    "answer": 1,
     "solution_images": [
       "./images/solutions/vu4-sol.png"
     ]
@@ -69,7 +69,7 @@
       "c",
       "d"
     ],
-    "answer": 1,
+    "answer": 0,
     "solution_images": [
       "./images/solutions/vu5-sol.png"
     ]
@@ -84,7 +84,7 @@
       "c",
       "d"
     ],
-    "answer": 0,
+    "answer": 1,
     "solution_images": [
       "./images/solutions/vu6-sol.png"
     ]
@@ -99,7 +99,7 @@
       "c",
       "d"
     ],
-    "answer": 1,
+    "answer": 0,
     "solution_images": [
       "./images/solutions/vu7-sol.png"
     ]
@@ -129,7 +129,7 @@
       "c",
       "d"
     ],
-    "answer": 1,
+    "answer": 2,
     "solution_images": [
       "./images/solutions/vu9-sol.png"
     ]
@@ -144,7 +144,7 @@
       "c",
       "d"
     ],
-    "answer": 1,
+    "answer": 2,
     "solution_images": [
       "./images/solutions/vu10-sol.png"
     ]
@@ -159,7 +159,7 @@
       "c",
       "d"
     ],
-    "answer": 1,
+    "answer": 0,
     "solution_images": [
       "./images/solutions/vu11-sol.png"
     ]
@@ -174,7 +174,7 @@
       "c",
       "d"
     ],
-    "answer": 1,
+    "answer": 2,
     "solution_images": [
       "./images/solutions/vu12-sol.png"
     ]
@@ -189,7 +189,7 @@
       "c",
       "d"
     ],
-    "answer": 0,
+    "answer": 1,
     "solution_images": [
       "./images/solutions/vu13-sol.png"
     ]
@@ -204,7 +204,7 @@
       "c",
       "d"
     ],
-    "answer": 0,
+    "answer": 1,
     "solution_images": [
       "./images/solutions/vu14-sol.png"
     ]
@@ -264,7 +264,7 @@
       "c",
       "d"
     ],
-    "answer": 0,
+    "answer": 1,
     "solution_images": [
       "./images/solutions/vu18-sol.png"
     ]
@@ -294,7 +294,7 @@
       "c",
       "d"
     ],
-    "answer": 1,
+    "answer": 0,
     "solution_images": [
       "./images/solutions/vu20-sol.png"
     ]
@@ -309,7 +309,7 @@
       "c",
       "d"
     ],
-    "answer": 1,
+    "answer": 0,
     "solution_images": [
       "./images/solutions/vu21-sol.png"
     ]
@@ -324,7 +324,7 @@
       "c",
       "d"
     ],
-    "answer": 1,
+    "answer": 2,
     "solution_images": [
       "./images/solutions/vu22-sol.png"
     ]
@@ -354,7 +354,7 @@
       "c",
       "d"
     ],
-    "answer": 1,
+    "answer": 0,
     "solution_images": [
       "./images/solutions/vu24-sol.png"
     ]
@@ -369,7 +369,7 @@
       "c",
       "d"
     ],
-    "answer": 1,
+    "answer": 3,
     "solution_images": [
       "./images/solutions/vu25-sol.png"
     ]
@@ -384,7 +384,7 @@
       "c",
       "d"
     ],
-    "answer": 1,
+    "answer": 0,
     "solution_images": [
       "./images/solutions/vu26-sol.png"
     ]
@@ -399,7 +399,7 @@
       "c",
       "d"
     ],
-    "answer": 1,
+    "answer": 2,
     "solution_images": [
       "./images/solutions/vu27-sol.png"
     ]
@@ -414,7 +414,7 @@
       "c",
       "d"
     ],
-    "answer": 1,
+    "answer": 0,
     "solution_images": [
       "./images/solutions/vu28-sol.png"
     ]
@@ -429,7 +429,7 @@
       "c",
       "d"
     ],
-    "answer": 1,
+    "answer": 3,
     "solution_images": [
       "./images/solutions/vu29-sol-2.png",
       "./images/solutions/vu29-sol.png"
