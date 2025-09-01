@@ -6,7 +6,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <link rel="manifest" href="manifest.webmanifest" />
 <link rel="apple-touch-icon" href="icons/icon-192.png" />
-<title>Exam Practice Demo</title>
+<title>Marked Price-Discount Ques</title>
 <style>
 :root{--bg:#f6f9ff;--card:#fff;--text:#0f172a;--muted:#64748b;--border:#e5edf7;--accent:#1565c0;--good:#1e8e3e;--bad:#c62828;--radius:14px;--shadow:0 10px 30px rgba(0,0,0,.06)}
 @media(prefers-color-scheme:dark){:root{--bg:#0b0f14;--card:#121923;--text:#eaf2ff;--muted:#8aa0b7;--border:#1e2a3a;--accent:#5ab0ff;--shadow:0 12px 34px rgba(0,0,0,.35)}}
@@ -63,7 +63,7 @@ dialog::backdrop{background:rgba(0,0,0,.5)}
 <body>
 <header>
   <div class="wrap top">
-    <h1>📝 Exam Practice Demo</h1>
+    <h1>📝 Marked Price-Discount Ques</h1>
     <div class="timer" id="timer">--:--:--</div>
   </div>
 </header>
@@ -204,7 +204,7 @@ const state = {
 /* ========= Load questions ========= */
 async function loadQuestions() {
   // CI replaces this token with the short SHA to bust cache
-  const res = await fetch('questions.json?v=bea4404'); /* placeholder */
+  const res = await fetch('questions.json?v=91934bd'); /* placeholder */
   const data = await res.json();
   state.tests = Array.isArray(data)
     ? [{ id:'demo', title:'Percentage', durationMinutes:120, negative:0.33, questions:data }]
